@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net471;netcoreapp2.0;netcoreapp3.1</TargetFrameworks>
+    <Description>DataAnnotations to validate VAT codes, social security numbers or tin numbers.</Description>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <PackageIcon>CountryValidator.png</PackageIcon>
+    <PackageTags>Data Annotations, VAT, SSN, Id, Social Security Number, TIN, Countries Validator</PackageTags>
+  </PropertyGroup>
+
+
+
+  <ItemGroup>
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\CountryValidator\CountryValidator.csproj" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Include="..\CountryValidator.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>

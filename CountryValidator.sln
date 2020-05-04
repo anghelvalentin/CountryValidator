@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CountryValidator", "CountryValidator\CountryValidator.csproj", "{0E0D8FAF-C66E-4025-904B-07BDE24924EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CountryValidator", "CountryValidator\CountryValidator.csproj", "{0E0D8FAF-C66E-4025-904B-07BDE24924EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CountryValidator.Tests", "CountryValidator.Tests\CountryValidator.Tests.csproj", "{6B523007-F906-40FB-8554-E4A2073FC1D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CountryValidator.DataAnnotations", "CountryValidator.DataAnnotations\CountryValidator.DataAnnotations.csproj", "{482667A0-F714-4D3B-9D54-C64A4BBAF571}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{0E0D8FAF-C66E-4025-904B-07BDE24924EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0E0D8FAF-C66E-4025-904B-07BDE24924EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0E0D8FAF-C66E-4025-904B-07BDE24924EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B523007-F906-40FB-8554-E4A2073FC1D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B523007-F906-40FB-8554-E4A2073FC1D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B523007-F906-40FB-8554-E4A2073FC1D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B523007-F906-40FB-8554-E4A2073FC1D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{482667A0-F714-4D3B-9D54-C64A4BBAF571}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{482667A0-F714-4D3B-9D54-C64A4BBAF571}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{482667A0-F714-4D3B-9D54-C64A4BBAF571}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{482667A0-F714-4D3B-9D54-C64A4BBAF571}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
