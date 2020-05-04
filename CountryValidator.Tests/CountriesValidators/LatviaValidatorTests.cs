@@ -53,14 +53,5 @@ namespace CountryValidation.Tests
             Assert.Equal(isValid, _latviaValidator.ValidateVAT(code).IsValid);
         }
 
-        [Theory]
-        [InlineData("LV-1000", true)]
-        [InlineData("LV1073", true)]
-        [InlineData("1073", true)]
-        [InlineData("LT-2321", false)]
-        public void TestPostalCode(string code, bool isValid)
-        {
-            Assert.Equal(isValid, _latviaValidator.ValidatePostalCode(code).IsValid);
-        }
     }
 }

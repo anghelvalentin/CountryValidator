@@ -127,15 +127,5 @@ namespace CountryValidation.Countries
             return isValid ? ValidationResult.Success() : ValidationResult.InvalidChecksum();
 
         }
-
-        public override ValidationResult ValidatePostalCode(string postalCode)
-        {
-            postalCode = postalCode.RemoveSpecialCharacthers().ToUpper();
-            if (!Regex.IsMatch(postalCode, "^[\\dA-Z]{3}[\\dA-Z]{4}$"))
-            {
-                return ValidationResult.InvalidFormat("WDD WDWD");
-            }
-            return ValidationResult.Success();
-        }
     }
 }

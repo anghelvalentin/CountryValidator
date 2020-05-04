@@ -54,13 +54,5 @@ namespace CountryValidation.Tests
             Assert.Equal(isValid, _franceValidator.ValidateVAT(code).IsValid);
         }
 
-        [Theory]
-        [InlineData("33380", true)]
-        [InlineData("34092", true)]
-        [InlineData("3321", false)]
-        public void TestPostalCode(string code, bool isValid)
-        {
-            Assert.Equal(isValid, _franceValidator.ValidatePostalCode(code).IsValid);
-        }
     }
 }

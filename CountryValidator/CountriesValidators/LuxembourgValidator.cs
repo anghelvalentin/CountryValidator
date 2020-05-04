@@ -168,15 +168,5 @@ namespace CountryValidation.Countries
             var isValid = int.Parse(vatId.Substring(0, 6)) % 89 == int.Parse(vatId.Substring(6, 2));
             return isValid ? ValidationResult.Success() : ValidationResult.InvalidChecksum();
         }
-
-        public override ValidationResult ValidatePostalCode(string postalCode)
-        {
-            postalCode = postalCode.RemoveSpecialCharacthers();
-            if (!Regex.IsMatch(postalCode, "^\\d{4}$"))
-            {
-                return ValidationResult.InvalidFormat("NNNN");
-            }
-            return ValidationResult.Success();
-        }
     }
 }

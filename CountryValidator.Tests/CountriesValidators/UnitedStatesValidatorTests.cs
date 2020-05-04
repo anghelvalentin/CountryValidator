@@ -48,13 +48,5 @@ namespace CountryValidation.Tests
 
         }
 
-        [Theory]
-        [InlineData("95014", true)]
-        [InlineData("99999-9999", true)]
-        [InlineData("950142", false)]
-        public void TestPostalCode(string code, bool isValid)
-        {
-            Assert.Equal(isValid, _unitedStatesValidator.ValidatePostalCode(code).IsValid);
-        }
     }
 }

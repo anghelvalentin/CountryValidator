@@ -182,16 +182,9 @@ namespace CountryValidation.Countries
                 }
             }
             return ValidationResult.Success();
-        }
 
-        public override ValidationResult ValidatePostalCode(string postalCode)
-        {
-            postalCode = postalCode.RemoveSpecialCharacthers();
-            if (!Regex.IsMatch(postalCode, "^\\d{5}$"))
-            {
-                return ValidationResult.InvalidFormat("NNNNN");
-            }
-            return ValidationResult.Success();
+
+
         }
     }
 }

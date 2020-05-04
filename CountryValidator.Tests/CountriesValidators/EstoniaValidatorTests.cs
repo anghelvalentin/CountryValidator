@@ -49,13 +49,5 @@ namespace CountryValidation.Tests
             Assert.Equal(isValid, _estoniaValidator.ValidateVAT(code).IsValid);
         }
 
-        [Theory]
-        [InlineData("69501-", true)]
-        [InlineData("12132", true)]
-        [InlineData("232131", false)]
-        public void TestPostalCode(string code, bool isValid)
-        {
-            Assert.Equal(isValid, _estoniaValidator.ValidatePostalCode(code).IsValid);
-        }
     }
 }

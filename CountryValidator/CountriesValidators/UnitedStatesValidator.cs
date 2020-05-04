@@ -108,15 +108,5 @@ namespace CountryValidation.Countries
         {
             throw new NotSupportedException($"{CountryCode} doesn't have VAT");
         }
-
-        public override ValidationResult ValidatePostalCode(string postalCode)
-        {
-            postalCode = postalCode.Trim();
-            if (!Regex.IsMatch(postalCode, @"^(?:(\d{5})(?:[ \-](\d{4}))?)$"))
-            {
-                return ValidationResult.InvalidFormat("NNNNN OR  NNNNN-NNNN");
-            }
-            return ValidationResult.Success();
-        }
     }
 }

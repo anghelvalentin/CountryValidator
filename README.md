@@ -1,17 +1,15 @@
 # Country Validator 
 
-Country Validator is a .NET library that can validate **VAT codes, national identification numbers, tax identification numbers for individuals and companies, and ZIP codes**
+Country Validator is a .NET library that can validate **VAT codes, national identification numbers and tax identification numbers for individuals and companies**
 
 ## Features
 - Validate Social Security Numbers/Personal Identity Numbers
 - Validate VAT Codes
 - Validate Tax Indentification Numbers for Individuals
 - Validate Tax Identification Numbers For Companies
-- Validate ZIP Postal Codes
 
 ## Install
 **Nuget Package [CountryValidator](https://www.nuget.org/packages/CountryValidator/)**
-
 **Nuget Package [CountryValidator.DataAnnotations](https://www.nuget.org/packages/CountryValidator.DataAnnotations/)**
 
 
@@ -24,7 +22,7 @@ Install-Package CountryValidator.DataAnnotations
 ## How to use Country Validator
 ### Using Validator Class
 ```csharp
-ICountryValidator validator = new CountryValidator();
+CountryValidator validator = new CountryValidator();
 ValidationResult validationResult = validator.ValidateNationalIdentityCode(ssn, Country.US);
 if (validationResult.IsValid)
 {
@@ -89,8 +87,6 @@ public IActionResult ValidateSSN([Required, SSNAttribute(Country.US)]string ssn)
 | Switzerland       | CH           | AHV (Sozialversicherungsnummer)                                           | VAT, MWST, TVA, IVA, TPV (Mehrwertsteuernummer, the Swiss VAT number). |
 | Sweden            | SE           | Personnummer - Personal Identity Number                                   | VAT-nummer or momsnummer                                               |
 | United States     | US           | Social Security Number                                                    | Not Supported                                                          |
-
-<a href="https://www.buymeacoffee.com/valentinanghel" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" style="height: 51px !important;width: 217px !important;" ></a>
 
 ### License
 Copyright 2020 Anghel Valentin

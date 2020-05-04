@@ -17,6 +17,5 @@ namespace CountryValidation
         public abstract ValidationResult ValidateIndividualTaxCode(string id);
         public abstract ValidationResult ValidateEntity(string id);
         public abstract ValidationResult ValidateVAT(string vatId);
-        public abstract ValidationResult ValidatePostalCode(string postalCode);
     }
 }

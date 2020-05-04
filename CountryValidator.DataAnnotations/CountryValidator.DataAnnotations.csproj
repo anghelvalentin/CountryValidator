@@ -2,16 +2,13 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard1.2;netstandard1.6;netstandard2.0;netstandard2.1;net47;net45</TargetFrameworks>
-    <Description>DataAnnotations to validate VAT codes, social security numbers, tin numbers and ZIP Postal codes. All countries from European Union are supported and United States.</Description>
+    <Description>DataAnnotations to validate VAT codes, social security numbers or tin numbers.</Description>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageIcon>CountryValidator.png</PackageIcon>
     <PackageTags>Data Annotations, VAT, SSN, Id, Social Security Number, TIN, Countries Validator</PackageTags>
     <PackageProjectUrl>https://github.com/anghelvalentin/CountryValidator</PackageProjectUrl>
     <RepositoryUrl>https://github.com/anghelvalentin/CountryValidator</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <AssemblyVersion>1.1.0.0</AssemblyVersion>
-    <FileVersion>1.1.0.0</FileVersion>
-    <Version>1.1.0</Version>
   </PropertyGroup>
 
 

@@ -57,12 +57,5 @@ namespace CountryValidation.Tests
             Assert.Equal(isValid, _irelandValidator.ValidateVAT(code).IsValid);
         }
 
-        [Theory]
-        [InlineData("A65 F4E2", true)]
-        [InlineData("231 2132a", false)]
-        public void TestPostalCode(string code, bool isValid)
-        {
-            Assert.Equal(isValid, _irelandValidator.ValidatePostalCode(code).IsValid);
-        }
     }
 }

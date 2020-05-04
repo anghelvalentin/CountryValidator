@@ -48,14 +48,5 @@ namespace CountryValidation.Tests
             Assert.Equal(isValid, _maltaValidator.ValidateVAT(code).IsValid);
         }
 
-        [Theory]
-        [InlineData("NXR 01", true)]
-        [InlineData("ZTN 05", true)]
-        [InlineData("VCT 17531", false)]
-        public void TestPostalCode(string code, bool isValid)
-        {
-            Assert.Equal(isValid, _maltaValidator.ValidatePostalCode(code).IsValid);
-        }
-
     }
 }
