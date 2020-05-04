@@ -1,14 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Description>Country Validator is a library that can be used to validate VAT/TVA codes, social security numbers and TINs (Tax Identification Numbers). </Description>
+    <Description>Country Validator is a library that can be used to validate VAT/TVA codes, social security numbers and TINs (Tax Identification Numbers). All countries from European Union are supported and United States.</Description>
     <TargetFrameworks>netstandard1.2;netstandard1.6;netstandard2.0;netstandard2.1;net47;net45</TargetFrameworks>
     <Authors>Anghel Valentin</Authors>
     <RepositoryType>git</RepositoryType>
-    <PackageTags>VAT, SSN, Id, Social Security Number, TIN, Countries Validator</PackageTags>
+    <PackageTags>VAT, SSN, Id, Social Security Number, TIN, Countries Validator, Validator</PackageTags>
     <PackageIcon>CountryValidator.png</PackageIcon>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-
+    <PackageProjectUrl>https://github.com/anghelvalentin/CountryValidator</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/anghelvalentin/CountryValidator</RepositoryUrl>
+    <RootNamespace>CountryValidation</RootNamespace>
+    <AssemblyName>CountryValidator</AssemblyName>
+    <PackageId>CountryValidator</PackageId>
   </PropertyGroup>
 
   <ItemGroup>

@@ -6,6 +6,9 @@
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageIcon>CountryValidator.png</PackageIcon>
     <PackageTags>Data Annotations, VAT, SSN, Id, Social Security Number, TIN, Countries Validator</PackageTags>
+    <PackageProjectUrl>https://github.com/anghelvalentin/CountryValidator</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/anghelvalentin/CountryValidator</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
 

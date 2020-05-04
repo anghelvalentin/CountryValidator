@@ -2,6 +2,12 @@
 
 Country Validator is a .NET library that can validate **VAT codes, national identification numbers and tax identification numbers for individuals and companies**
 
+## Features
+- Validate Social Security Numbers/Personal Identity Numbers
+- Validate VAT Codes
+- Validate Tax Indentification Numbers for Individuals
+- Validate Tax Identification Numbers For Companies
+
 ## How to use Country Validator
 ### Using Validator Class
 ```csharp
@@ -70,3 +76,8 @@ public IActionResult ValidateSSN([Required, SSNAttribute(Country.US)]string ssn)
 | Switzerland       | CH           | AHV (Sozialversicherungsnummer)                                           | VAT, MWST, TVA, IVA, TPV (Mehrwertsteuernummer, the Swiss VAT number). |
 | Sweden            | SE           | Personnummer - Personal Identity Number                                   | VAT-nummer or momsnummer                                               |
 | United States     | US           | Social Security Number                                                    | Not Supported                                                          |
+
+### License
+Copyright 2020 Anghel Valentin
+
+Licensed under the Apache License, Version 2.0: http://www.apache.org/licenses/LICENSE-2.0
