@@ -1,9 +1,9 @@
-﻿using CountryValidator;
+﻿using CountryValidation;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace CountryValidator.DataAnnotations
+namespace CountryValidation.DataAnnotations
 {
     /// <summary>
     /// When applied to a <see cref="string" /> property or parameter, validates that a valid VAT/TVA Code is provided.
@@ -13,7 +13,7 @@ namespace CountryValidator.DataAnnotations
     {
         public PersonTINAttribute(Country countryCode)
         {
-            if (Enum.IsDefined(typeof(Country), countryCode))
+            if (!Enum.IsDefined(typeof(Country), countryCode))
             {
                 throw new ArgumentNullException(nameof(countryCode));
             }
@@ -35,14 +35,14 @@ namespace CountryValidator.DataAnnotations
                 return base.IsValid(value, validationContext);
             }
 
-            TaxValidator taxValidator = new TaxValidator();
+            CountryValidator taxValidator = new CountryValidator();
             ValidationResult result = taxValidator.ValidateIndividualTaxCode(vat, CountryCode);
             if (result.IsValid)
             {
                 return System.ComponentModel.DataAnnotations.ValidationResult.Success;
             }
 
-            validationContext.Items.Add("Error", result.Error);
+            validationContext.Items.Add("Error", result.ErrorMessage);
 
             IEnumerable<string> memberNames = null;
             if (validationContext.MemberName != null)

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace CountryValidator.Countries
+namespace CountryValidation.Countries
 {
     public class PortugalValidator : IdValidationAbstract
     {
@@ -52,6 +52,11 @@ namespace CountryValidator.Countries
             {'Z', 35}
         };
 
+        /// <summary>
+        /// Número de identificação civil - NIC
+        /// </summary>
+        /// <param name="ssn"></param>
+        /// <returns></returns>
         public override ValidationResult ValidateNationalIdentity(string ssn)
         {
             ValidationResult validation = ValidateCartaoCidadao(ssn);

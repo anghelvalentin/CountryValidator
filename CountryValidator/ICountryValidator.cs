@@ -1,6 +1,6 @@
-﻿namespace CountryValidator
+﻿namespace CountryValidation
 {
-    public interface ITaxValidator
+    public interface ICountryValidator
     {
         ValidationResult ValidateEntity(string vat, Country country);
         ValidationResult ValidateIndividualTaxCode(string id, Country country);

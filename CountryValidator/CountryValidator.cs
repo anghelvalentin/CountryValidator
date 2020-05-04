@@ -1,13 +1,13 @@
-﻿using CountryValidator.Countries;
+﻿using CountryValidation.Countries;
 using System.Collections.Generic;
 
-namespace CountryValidator
+namespace CountryValidation
 {
-    public class TaxValidator : ITaxValidator
+    public class CountryValidator : ICountryValidator
     {
         static Dictionary<Country, IdValidationAbstract> _supportedCountries;
 
-        static TaxValidator()
+        static CountryValidator()
         {
             _supportedCountries = Load();
         }

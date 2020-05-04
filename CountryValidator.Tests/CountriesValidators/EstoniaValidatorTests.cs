@@ -1,10 +1,10 @@
-﻿using CountryValidator.Countries;
+﻿using CountryValidation.Countries;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using Xunit;
 
-namespace CountryValidator.Tests
+namespace CountryValidation.Tests
 {
     public class EstoniaValidatorTests
     {

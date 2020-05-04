@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace CountryValidator.Countries
+namespace CountryValidation.Countries
 {
     public class DenmarkValidator : IdValidationAbstract
     {
@@ -18,6 +18,11 @@ namespace CountryValidator.Countries
         }
 
 
+        /// <summary>
+        /// Det Centrale Personregister
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public override ValidationResult ValidateIndividualTaxCode(string value)
         {
             value = value.RemoveSpecialCharacthers();

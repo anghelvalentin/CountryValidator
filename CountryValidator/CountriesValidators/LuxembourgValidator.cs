@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace CountryValidator.Countries
+namespace CountryValidation.Countries
 {
     public class LuxembourgValidator : IdValidationAbstract
     {

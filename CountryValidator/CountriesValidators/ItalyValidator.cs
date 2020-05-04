@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace CountryValidator.Countries
+namespace CountryValidation.Countries
 {
     public class ItalyValidator : IdValidationAbstract
     {
@@ -53,7 +53,7 @@ namespace CountryValidator.Countries
         private char GetControlChar(string f15)
         {
             int tot = 0;
-            byte[] arrCode = Encoding.ASCII.GetBytes(f15.ToUpper());
+            byte[] arrCode = Encoding.UTF8.GetBytes(f15.ToUpper());
             for (int i = 0; i < f15.Length; i++)
             {
                 if ((i + 1) % 2 == 0) tot += (char.IsLetter(f15, i))

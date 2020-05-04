@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace CountryValidator.Countries
+namespace CountryValidation.Countries
 {
     public class LithuaniaValidator : IdValidationAbstract
     {

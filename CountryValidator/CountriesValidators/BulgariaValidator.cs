@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace CountryValidator.Countries
+namespace CountryValidation.Countries
 {
     public class BulgariaValidator : IdValidationAbstract
     {
-        private static readonly Regex RegexPhysicalPerson = new Regex(@"^\d\d[0-5]\d[0-3]\d\d{4}$", RegexOptions.Compiled);
+        private static readonly Regex RegexPhysicalPerson = new Regex(@"^\d\d[0-5]\d[0-3]\d\d{4}$");
         private static readonly int[] _multipliersPhysicalPerson = { 2, 4, 8, 5, 10, 9, 7, 3, 6 };
         private static readonly int[] MultipliersForeignPhysicalPerson = { 21, 19, 17, 13, 11, 9, 7, 3, 1 };
         private static readonly int[] MultipliersMiscellaneous = { 4, 3, 2, 7, 6, 5, 4, 3, 2 };
@@ -65,6 +65,11 @@ namespace CountryValidator.Countries
             }
         }
 
+        /// <summary>
+        /// Edinen grazhdanski nomer (EGN)
+        /// </summary>
+        /// <param name="number"></param>
+        /// <returns></returns>
         public override ValidationResult ValidateNationalIdentity(string number)
         {
             number = number.RemoveSpecialCharacthers();

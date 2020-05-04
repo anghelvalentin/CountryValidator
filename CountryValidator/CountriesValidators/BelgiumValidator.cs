@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace CountryValidator.Countries
+namespace CountryValidation.Countries
 {
     public class BelgiumValidator : IdValidationAbstract
     {
@@ -29,7 +29,7 @@ namespace CountryValidator.Countries
         }
 
         /// <summary>
-        /// Validate Rijksregisternummer
+        /// Rijksregisternummer
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
