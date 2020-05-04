@@ -8,6 +8,17 @@ Country Validator is a .NET library that can validate **VAT codes, national iden
 - Validate Tax Indentification Numbers for Individuals
 - Validate Tax Identification Numbers For Companies
 
+## Install
+**Nuget Package [CountryValidator](https://www.nuget.org/packages/CountryValidator/)**
+**Nuget Package [CountryValidator.DataAnnotations](https://www.nuget.org/packages/CountryValidator.DataAnnotations/)**
+
+
+```powershell
+Install-Package CountryValidator
+Install-Package CountryValidator.DataAnnotations
+```
+
+
 ## How to use Country Validator
 ### Using Validator Class
 ```csharp
@@ -81,3 +92,6 @@ public IActionResult ValidateSSN([Required, SSNAttribute(Country.US)]string ssn)
 Copyright 2020 Anghel Valentin
 
 Licensed under the Apache License, Version 2.0: http://www.apache.org/licenses/LICENSE-2.0
+
+##### Special thanks
+[Python Stdnum](https://github.com/arthurdejong/python-stdnum)
