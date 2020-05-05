@@ -122,5 +122,15 @@ namespace CountryValidation.Countries
             bool isValid = checkDigit == controlDigit;
             return isValid ? ValidationResult.Success() : ValidationResult.InvalidChecksum();
         }
+
+        public override ValidationResult ValidatePostalCode(string postalCode)
+        {
+            postalCode = postalCode.RemoveSpecialCharacthers();
+            if (!Regex.IsMatch(postalCode, "^\\d{6}$"))
+            {
+                return ValidationResult.InvalidFormat("NNNNNN");
+            }
+            return ValidationResult.Success();
+        }
     }
 }

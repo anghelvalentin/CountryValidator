@@ -57,5 +57,13 @@ namespace CountryValidation.Tests
             Assert.Equal(isValid, _romaniaValidator.ValidateVAT(code).IsValid);
         }
 
+        [Theory]
+        [InlineData("021602", true)]
+        [InlineData("061357", true)]
+        [InlineData("32123", false)]
+        public void TestPostalCode(string code, bool isValid)
+        {
+            Assert.Equal(isValid, _romaniaValidator.ValidatePostalCode(code).IsValid);
+        }
     }
 }

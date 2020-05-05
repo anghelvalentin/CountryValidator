@@ -48,5 +48,13 @@ namespace CountryValidation.Tests
             Assert.Equal(isValid, _ukValidator.ValidateVAT(code).IsValid);
         }
 
+        [Theory]
+        [InlineData("EC1Y 8SY", true)]
+        [InlineData("GIR0AA", true)]
+        [InlineData("321311", false)]
+        public void TestPostalCode(string code, bool isValid)
+        {
+            Assert.Equal(isValid, _ukValidator.ValidatePostalCode(code).IsValid);
+        }
     }
 }

@@ -125,5 +125,15 @@ namespace CountryValidation.Countries
             bool isValid = checkDigit == vat[7].ToInt();
             return isValid ? ValidationResult.Success() : ValidationResult.InvalidChecksum();
         }
+
+        public override ValidationResult ValidatePostalCode(string postalCode)
+        {
+            postalCode = postalCode.RemoveSpecialCharacthers().ToUpper().Replace("SI", string.Empty);
+            if (!Regex.IsMatch(postalCode, "^\\d{4}$"))
+            {
+                return ValidationResult.InvalidFormat("NNNN");
+            }
+            return ValidationResult.Success();
+        }
     }
 }

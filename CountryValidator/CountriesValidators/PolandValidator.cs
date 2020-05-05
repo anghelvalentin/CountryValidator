@@ -227,5 +227,15 @@ namespace CountryValidation.Countries
 
             return sum % 10;
         }
+
+        public override ValidationResult ValidatePostalCode(string postalCode)
+        {
+            postalCode = postalCode.RemoveSpecialCharacthers();
+            if (!Regex.IsMatch(postalCode, "^\\d{5}$"))
+            {
+                return ValidationResult.InvalidFormat("NN-NNN");
+            }
+            return ValidationResult.Success();
+        }
     }
 }

@@ -68,5 +68,15 @@ namespace CountryValidation.Countries
 
             return checkDigit == int.Parse(vatId.Substring(6, 2)) ? ValidationResult.Success() : ValidationResult.InvalidChecksum();
         }
+
+        public override ValidationResult ValidatePostalCode(string postalCode)
+        {
+            postalCode = postalCode.RemoveSpecialCharacthers();
+            if (!Regex.IsMatch(postalCode, "^[A-Z]{3}\\d{2,4}$"))
+            {
+                return ValidationResult.InvalidFormat("AAANNNN OR (AAA NNNN)");
+            }
+            return ValidationResult.Success();
+        }
     }
 }

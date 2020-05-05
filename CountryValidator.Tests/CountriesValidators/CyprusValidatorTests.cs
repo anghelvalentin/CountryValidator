@@ -49,5 +49,13 @@ namespace CountryValidation.Tests
             Assert.Equal(isValid, _cyprusValidator.ValidateVAT(code).IsValid);
         }
 
+        [Theory]
+        [InlineData("2008", true)]
+        [InlineData("3004 ", true)]
+        [InlineData("1", false)]
+        public void TestPostalCode(string code, bool isValid)
+        {
+            Assert.Equal(isValid, _cyprusValidator.ValidatePostalCode(code).IsValid);
+        }
     }
 }

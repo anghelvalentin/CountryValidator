@@ -215,5 +215,15 @@ namespace CountryValidation.Countries
             }
             return ValidationResult.Invalid("Invalid format");
         }
+
+        public override ValidationResult ValidatePostalCode(string postalCode)
+        {
+            postalCode = postalCode.Trim();
+            if (!(Regex.IsMatch(postalCode, @"^\d{3}\s?\d{2}$") || Regex.IsMatch(postalCode, "^\\d{4}$")))
+            {
+                return ValidationResult.InvalidFormat("NNN NN");
+            }
+            return ValidationResult.Success();
+        }
     }
 }

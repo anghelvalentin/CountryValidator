@@ -51,5 +51,13 @@ namespace CountryValidation.Tests
             Assert.Equal(isValid, _sloveniaValidator.ValidateVAT(code).IsValid);
         }
 
+        [Theory]
+        [InlineData("4000", true)]
+        [InlineData("2500", true)]
+        [InlineData("211212", false)]
+        public void TestPostalCode(string code, bool isValid)
+        {
+            Assert.Equal(isValid, _sloveniaValidator.ValidatePostalCode(code).IsValid);
+        }
     }
 }

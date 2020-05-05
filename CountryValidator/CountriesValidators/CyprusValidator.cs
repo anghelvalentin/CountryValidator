@@ -87,5 +87,15 @@ namespace CountryValidation.Countries
 
             return ValidateEntity(vat);
         }
+
+        public override ValidationResult ValidatePostalCode(string postalCode)
+        {
+            postalCode = postalCode.RemoveSpecialCharacthers();
+            if (!Regex.IsMatch(postalCode, "^\\d{4}$"))
+            {
+                return ValidationResult.InvalidFormat("NNNN");
+            }
+            return ValidationResult.Success();
+        }
     }
 }

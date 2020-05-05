@@ -6,12 +6,12 @@ using System.ComponentModel.DataAnnotations;
 namespace CountryValidation.DataAnnotations
 {
     /// <summary>
-    /// When applied to a <see cref="string" /> property or parameter, validates that a valid TIN is provided.
+    /// When applied to a <see cref="string" /> property or parameter, validates that a valid Zip Code is provided.
     /// </summary>
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Parameter)]
-    public class PersonTINAttribute : ValidationAttribute
+    public class ZipCodeAttribute : ValidationAttribute
     {
-        public PersonTINAttribute(Country countryCode)
+        public ZipCodeAttribute(Country countryCode)
         {
             if (!Enum.IsDefined(typeof(Country), countryCode))
             {
@@ -30,13 +30,13 @@ namespace CountryValidation.DataAnnotations
                 return System.ComponentModel.DataAnnotations.ValidationResult.Success;
             }
 
-            if (!(value is string vat))
+            if (!(value is string zip))
             {
                 return base.IsValid(value, validationContext);
             }
 
             CountryValidator taxValidator = new CountryValidator();
-            ValidationResult result = taxValidator.ValidateIndividualTaxCode(vat, CountryCode);
+            ValidationResult result = taxValidator.ValidateZIPCode(zip, CountryCode);
             if (result.IsValid)
             {
                 return System.ComponentModel.DataAnnotations.ValidationResult.Success;

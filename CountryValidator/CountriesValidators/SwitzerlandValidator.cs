@@ -131,5 +131,15 @@ namespace CountryValidation.Countries
 
             return sum.ToString() == value.Substring(8, 1) ? ValidationResult.Success() : ValidationResult.InvalidChecksum();
         }
+
+        public override ValidationResult ValidatePostalCode(string postalCode)
+        {
+            postalCode = postalCode.RemoveSpecialCharacthers();
+            if (!Regex.IsMatch(postalCode, "^\\d{4}$"))
+            {
+                return ValidationResult.InvalidFormat("NNNN");
+            }
+            return ValidationResult.Success();
+        }
     }
 }

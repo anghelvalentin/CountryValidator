@@ -53,5 +53,13 @@ namespace CountryValidation.Tests
             Assert.Equal(isValid, _slovakiaValidator.ValidateVAT(code).IsValid);
         }
 
+        [Theory]
+        [InlineData("010 01", true)]
+        [InlineData("02314", true)]
+        [InlineData("321", false)]
+        public void TestPostalCode(string code, bool isValid)
+        {
+            Assert.Equal(isValid, _slovakiaValidator.ValidatePostalCode(code).IsValid);
+        }
     }
 }
