@@ -1,15 +1,17 @@
 # Country Validator 
 
-Country Validator is a .NET library that can validate **VAT codes, national identification numbers and tax identification numbers for individuals and companies**
+Country Validator is a .NET library that can validate **VAT codes, national identification numbers, tax identification numbers for individuals and companies, and ZIP codes**
 
 ## Features
 - Validate Social Security Numbers/Personal Identity Numbers
 - Validate VAT Codes
 - Validate Tax Indentification Numbers for Individuals
 - Validate Tax Identification Numbers For Companies
+- Validate ZIP Postal Codes
 
 ## Install
 **Nuget Package [CountryValidator](https://www.nuget.org/packages/CountryValidator/)**
+
 **Nuget Package [CountryValidator.DataAnnotations](https://www.nuget.org/packages/CountryValidator.DataAnnotations/)**
 
 
@@ -22,7 +24,7 @@ Install-Package CountryValidator.DataAnnotations
 ## How to use Country Validator
 ### Using Validator Class
 ```csharp
-CountryValidator validator = new CountryValidator();
+ICountryValidator validator = new CountryValidator();
 ValidationResult validationResult = validator.ValidateNationalIdentityCode(ssn, Country.US);
 if (validationResult.IsValid)
 {
