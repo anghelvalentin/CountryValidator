@@ -64,5 +64,13 @@ namespace CountryValidation.Tests
             Assert.Equal(isValid, _czechValidator.ValidateVAT(code).IsValid);
         }
 
+        [Theory]
+        [InlineData("100 00", true)]
+        [InlineData("22599", true)]
+        [InlineData("321", false)]
+        public void TestPostalCode(string code, bool isValid)
+        {
+            Assert.Equal(isValid, _czechValidator.ValidatePostalCode(code).IsValid);
+        }
     }
 }

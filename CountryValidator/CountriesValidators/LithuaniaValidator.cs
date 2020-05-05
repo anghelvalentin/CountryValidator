@@ -132,5 +132,15 @@ namespace CountryValidation.Countries
             var isValid = total == vat[11].ToInt();
             return isValid ? ValidationResult.Success() : ValidationResult.InvalidChecksum();
         }
+
+        public override ValidationResult ValidatePostalCode(string postalCode)
+        {
+            postalCode = postalCode.RemoveSpecialCharacthers().ToUpper().Replace("LT", string.Empty);
+            if (!Regex.IsMatch(postalCode, "^\\d{5}$"))
+            {
+                return ValidationResult.InvalidFormat("LT-NNNNN");
+            }
+            return ValidationResult.Success();
+        }
     }
 }

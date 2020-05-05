@@ -47,5 +47,13 @@ namespace CountryValidation.Tests
             Assert.Equal(isValid, _croatiaValidator.ValidateVAT(code).IsValid);
         }
 
+        [Theory]
+        [InlineData("21001 ", true)]
+        [InlineData("10002", true)]
+        [InlineData("23", false)]
+        public void TestPostalCode(string code, bool isValid)
+        {
+            Assert.Equal(isValid, _croatiaValidator.ValidatePostalCode(code).IsValid);
+        }
     }
 }

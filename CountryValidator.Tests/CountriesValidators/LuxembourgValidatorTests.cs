@@ -49,5 +49,14 @@ namespace CountryValidation.Tests
             Assert.Equal(isValid, _luxembourgValidator.ValidateVAT(code).IsValid);
         }
 
+        [Theory]
+        [InlineData("4750", true)]
+        [InlineData("2998", true)]
+        [InlineData("a1", false)]
+        public void TestPostalCode(string code, bool isValid)
+        {
+            Assert.Equal(isValid, _luxembourgValidator.ValidatePostalCode(code).IsValid);
+        }
+
     }
 }

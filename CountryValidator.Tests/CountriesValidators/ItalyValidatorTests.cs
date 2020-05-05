@@ -48,5 +48,13 @@ namespace CountryValidation.Tests
             Assert.Equal(isValid, _italyValidator.ValidateVAT(code).IsValid);
         }
 
+        [Theory]
+        [InlineData("00144", true)]
+        [InlineData("39049", true)]
+        [InlineData("123", false)]
+        public void TestPostalCode(string code, bool isValid)
+        {
+            Assert.Equal(isValid, _italyValidator.ValidatePostalCode(code).IsValid);
+        }
     }
 }

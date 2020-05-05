@@ -49,5 +49,13 @@ namespace CountryValidation.Tests
             Assert.Equal(isValid, _denmarkValidator.ValidateVAT(code).IsValid);
         }
 
+        [Theory]
+        [InlineData("8660", true)]
+        [InlineData("1566-", true)]
+        [InlineData("23", false)]
+        public void TestPostalCode(string code, bool isValid)
+        {
+            Assert.Equal(isValid, _denmarkValidator.ValidatePostalCode(code).IsValid);
+        }
     }
 }

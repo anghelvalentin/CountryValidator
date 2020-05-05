@@ -49,5 +49,14 @@ namespace CountryValidation.Tests
         {
             Assert.Equal(isValid, _greeceValidator.ValidateVAT(code).IsValid);
         }
+
+        [Theory]
+        [InlineData("151 24", true)]
+        [InlineData("151-10", true)]
+        [InlineData("151", false)]
+        public void TestPostalCode(string code, bool isValid)
+        {
+            Assert.Equal(isValid, _greeceValidator.ValidatePostalCode(code).IsValid);
+        }
     }
 }
