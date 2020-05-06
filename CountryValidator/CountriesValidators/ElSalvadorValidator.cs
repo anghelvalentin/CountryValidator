@@ -53,6 +53,7 @@ namespace CountryValidation.Countries
         /// <returns></returns>
         public override ValidationResult ValidateIndividualTaxCode(string number)
         {
+            number = number.RemoveSpecialCharacthers();
             if (number.Length != 14)
             {
                 return ValidationResult.InvalidLength();
@@ -74,7 +75,7 @@ namespace CountryValidation.Countries
 
         public override ValidationResult ValidateVAT(string vatId)
         {
-            return ValidateVAT(vatId);
+            return ValidateIndividualTaxCode(vatId);
         }
         public override ValidationResult ValidatePostalCode(string postalCode)
         {

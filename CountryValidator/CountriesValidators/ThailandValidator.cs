@@ -31,23 +31,34 @@ namespace CountryValidation.Countries
                 sum += (int)Char.GetNumericValue(value[i]) * (13 - i);
             }
 
-            return (11 - sum % 11) % 10 == (int)char.GetNumericValue(value[12]) ? ValidationResult.Success() : ValidationResult.InvalidChecksum();
+            return (11 - sum % 11).Mod(10) == (int)char.GetNumericValue(value[12]) ? ValidationResult.Success() : ValidationResult.InvalidChecksum();
 
         }
 
         public override ValidationResult ValidateEntity(string id)
         {
-            throw new NotImplementedException();
+            return ValidateIndividualTaxCode(id);
         }
 
         public override ValidationResult ValidateIndividualTaxCode(string ssn)
         {
-            throw new NotImplementedException();
+            ssn = ssn.RemoveSpecialCharacthers();
+            if (ValidateNationalIdentity(ssn).IsValid)
+            {
+                return ValidationResult.Success();
+            }
+            else if (!Regex.IsMatch(ssn, @"^\d{10}$"))
+            {
+                return ValidationResult.Success();
+
+            }
+            return ValidationResult.Invalid("Invalid TIN");
+
         }
 
         public override ValidationResult ValidateVAT(string vatId)
         {
-            throw new NotImplementedException();
+            return ValidateIndividualTaxCode(vatId);
         }
 
         public override ValidationResult ValidatePostalCode(string postalCode)

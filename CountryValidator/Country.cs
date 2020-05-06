@@ -343,6 +343,18 @@ namespace CountryValidation
         /// <summary>
         /// Malta
         /// </summary>
-        MT
+        MT,
+        /// <summary>
+        /// Philippines
+        /// </summary>
+        PH,
+        /// <summary>
+        /// Uzbekistan
+        /// </summary>
+        UZ,
+        /// <summary>
+        /// United Arab Erimates
+        /// </summary>
+        AE
     }
 }
