@@ -20,7 +20,7 @@ namespace CountryValidation.Countries
         /// <returns></returns>
         public override ValidationResult ValidateNationalIdentity(string ssn)
         {
-            if (!Regex.IsMatch(ssn, @"^\d{5,7}\w?$"))
+            if (!Regex.IsMatch(ssn, @"^\d{5,8}\w?$"))
             {
                 return ValidationResult.InvalidFormat("1234567");
             }
@@ -28,19 +28,30 @@ namespace CountryValidation.Countries
 
         }
 
+        /// <summary>
+        /// Número de Identificación Tributaria
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public override ValidationResult ValidateEntity(string id)
         {
-            throw new NotImplementedException();
+            id = id.RemoveSpecialCharacthers();
+            if (!Regex.IsMatch(id, @"^\d{10,}$"))
+            {
+                return ValidationResult.InvalidFormat("1234567890");
+            }
+
+            return ValidationResult.Success();
         }
 
         public override ValidationResult ValidateIndividualTaxCode(string id)
         {
-            throw new NotImplementedException();
+            return ValidateEntity(id);
         }
 
         public override ValidationResult ValidateVAT(string vatId)
         {
-            throw new NotImplementedException();
+            return ValidateEntity(vatId);
         }
 
         public override ValidationResult ValidatePostalCode(string postalCode)

@@ -36,7 +36,12 @@ namespace CountryValidation.Countries
 
         public override ValidationResult ValidatePostalCode(string postalCode)
         {
-            throw new NotImplementedException();
+            postalCode = postalCode.RemoveSpecialCharacthers();
+            if (!Regex.IsMatch(postalCode, "^\\d{4}$"))
+            {
+                return ValidationResult.InvalidFormat("NNNN");
+            }
+            return ValidationResult.Success();
         }
 
         public override ValidationResult ValidateVAT(string vatId)

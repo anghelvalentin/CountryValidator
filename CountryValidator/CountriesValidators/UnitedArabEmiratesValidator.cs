@@ -43,7 +43,7 @@ namespace CountryValidation.Countries
 
         public override ValidationResult ValidatePostalCode(string postalCode)
         {
-            throw new NotImplementedException();
+            throw new NotSupportedException();
         }
 
         public override ValidationResult ValidateVAT(string vatId)

@@ -27,10 +27,14 @@ namespace CountryValidation.Countries
             }
             return ValidationResult.Success();
         }
-
         public override ValidationResult ValidatePostalCode(string postalCode)
         {
-            throw new NotImplementedException();
+            postalCode = postalCode.RemoveSpecialCharacthers();
+            if (!Regex.IsMatch(postalCode, "^\\d{6}$"))
+            {
+                return ValidationResult.InvalidFormat("NNN NNN");
+            }
+            return ValidationResult.Success();
         }
 
         public override ValidationResult ValidateVAT(string vatId)
