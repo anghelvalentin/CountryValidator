@@ -90,6 +90,8 @@ public IActionResult ValidateSSN([Required, SSNAttribute(Country.US)]string ssn)
 | Sweden            | SE           | Personnummer - Personal Identity Number                                   | VAT-nummer or momsnummer                                               |
 | United States     | US           | Social Security Number                                                    | Not Supported                                                          |
 
+<a href="https://www.buymeacoffee.com/valentinanghel" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" style="height: 51px !important;width: 217px !important;" ></a>
+
 ### License
 Copyright 2020 Anghel Valentin
 
