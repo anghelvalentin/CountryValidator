@@ -78,7 +78,5 @@ namespace CountryValidation.Countries
             }
             return ValidationResult.Success();
         }
-
-
     }
 }

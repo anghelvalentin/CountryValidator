@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CountryValidator.Tests", "C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CountryValidator.DataAnnotations", "CountryValidator.DataAnnotations\CountryValidator.DataAnnotations.csproj", "{482667A0-F714-4D3B-9D54-C64A4BBAF571}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{C8F2A0C0-DE07-44F8-903E-35A91DB805F3}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,10 +27,6 @@ Global
 		{482667A0-F714-4D3B-9D54-C64A4BBAF571}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{482667A0-F714-4D3B-9D54-C64A4BBAF571}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{482667A0-F714-4D3B-9D54-C64A4BBAF571}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C8F2A0C0-DE07-44F8-903E-35A91DB805F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C8F2A0C0-DE07-44F8-903E-35A91DB805F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C8F2A0C0-DE07-44F8-903E-35A91DB805F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C8F2A0C0-DE07-44F8-903E-35A91DB805F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

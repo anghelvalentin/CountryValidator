@@ -1,116 +1,88 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace CountryValidation
+﻿namespace CountryValidation
 {
     public enum Country
     {
         /// <summary>
-        /// Argentina
+        /// Unknown
         /// </summary>
-        AR,
+        XX = 0,
+
         /// <summary>
         /// Andorra
         /// </summary>
         AD,
         /// <summary>
+        /// United Arab Erimates
+        /// </summary>
+        AE,
+        /// <summary>
         /// Albania
         /// </summary>
         AL,
+        /// <summary>
+        /// Armenia
+        /// </summary>
+        AM,
+        /// <summary>
+        /// Argentina
+        /// </summary>
+        AR,
+        /// <summary>
+        /// Austria
+        /// </summary>
+        AT,
         /// <summary>
         /// Australia
         /// </summary>
         AU,
         /// <summary>
+        /// Azerbaijan
+        /// </summary>
+        AZ,
+        /// <summary>
+        /// Bosnia and Herzegovina
+        /// </summary>
+        BA,
+        /// <summary>
+        /// Belgium
+        /// </summary>
+        BE,
+        /// <summary>
+        /// Bulgaria
+        /// </summary>
+        BG,
+        /// <summary>
+        /// Bahrain
+        /// </summary>
+        BH,
+        /// <summary>
+        /// Bolivia
+        /// </summary>
+        BO,
+        /// <summary>
         /// Brazil
         /// </summary>
         BR,
-        /// <summary>
-        /// Canada
-        /// </summary>
-        CA,
-        /// <summary>
-        /// China
-        /// </summary>
-        CN,
-        /// <summary>
-        /// Hong Kong
-        /// </summary>
-        HK,
-        /// <summary>
-        /// Iceland
-        /// </summary>
-        IS,
-        /// <summary>
-        /// India
-        /// </summary>
-        IN,
-        /// <summary>
-        /// Israel
-        /// </summary>
-        IL,
-        /// <summary>
-        /// Korea
-        /// </summary>
-        KR,
-        /// <summary>
-        /// Monaco Validator
-        /// </summary>
-        MC,
-        /// <summary>
-        /// Moldova
-        /// </summary>
-        MD,
-        /// <summary>
-        /// Mauritius
-        /// </summary>
-        MU,
-        /// <summary>
-        /// Mexico
-        /// </summary>
-        MX,
-        /// <summary>
-        /// Malaysia
-        /// </summary>
-        MY,
-        /// <summary>
-        /// Norway
-        /// </summary>
-        NO,
-        /// <summary>
-        /// Russia
-        /// </summary>
-        RU,
-        /// <summary>
-        /// Pakistan
-        /// </summary>
-        PK,
-        /// <summary>
-        /// Taiwan
-        /// </summary>
-        TW,
-        /// <summary>
-        /// Serbia
-        /// </summary>
-        RS,
-        /// <summary>
-        /// South Africa
-        /// </summary>
-        ZA,
-        /// <summary>
-        /// Venezuela
-        /// </summary>
-        VE,
-
         /// <summary>
         /// Belarus
         /// </summary>
         BY,
         /// <summary>
+        /// Canada
+        /// </summary>
+        CA,
+        /// <summary>
+        /// Switzerland
+        /// </summary>
+        CH,
+        /// <summary>
         /// Chile
         /// </summary>
         CL,
+        /// <summary>
+        /// China
+        /// </summary>
+        CN,
         /// <summary>
         /// Columbia
         /// </summary>
@@ -124,124 +96,11 @@ namespace CountryValidation
         /// </summary>
         CU,
         /// <summary>
-        /// Dominican Republic
-        /// </summary>
-        DO,
-        /// <summary>
-        /// Ecuador
-        /// </summary>
-        EC,
-        /// <summary>
-        /// Paraguay
-        /// </summary>
-        PY,
-        /// <summary>
-        /// New Zealand
-        /// </summary>
-        NZ,
-        /// <summary>
-        /// Urguay
-        /// </summary>
-        UY,
-        /// <summary>
-        /// Turkey
-        /// </summary>
-        TR,
-        /// <summary>
-        /// San Marino
-        /// </summary>
-        SM,
-
-        /// <summary>
-        /// Guatemala
-        /// </summary>
-        GT,
-        /// <summary>
-        /// Japan
-        /// </summary>
-        JP,
-        /// <summary>
-        ///  North Macedonia
-        /// </summary>
-        MK,
-        /// <summary>
-        /// Bosnia and Herzegovina
-        /// </summary>
-        BA,
-        /// <summary>
-        /// Thailand
-        /// </summary>
-        TH,
-        /// <summary>
-        /// Montenegro
-        /// </summary>
-        ME,
-        /// <summary>
-        /// Peru
-        /// </summary>
-        PE,
-        /// <summary>
-        /// Indonesia
-        /// </summary>
-        ID,
-        /// <summary>
-        /// Kazahstan
-        /// </summary>
-        KZ,
-        /// <summary>
-        /// Georgia
-        /// </summary>
-        GE,
-        /// <summary>
-        /// Armenia
-        /// </summary>
-        AM,
-        /// <summary>
-        /// Faroe Islands
-        /// </summary>
-        FO,
-        /// <summary>
-        /// Nigeria
-        /// </summary>
-        NG,
-        /// <summary>
-        /// Azerbaijan
-        /// </summary>
-        AZ,
-        /// <summary>
-        /// Bolivia
-        /// </summary>
-        BO,
-        /// <summary>
-        /// Ukraine
-        /// </summary>
-        UA,
-        /// <summary>
-        /// El Salvador
-        /// </summary>
-        SV,
-        /// <summary>
-        /// Bahrain
-        /// </summary>
-        BH,
-        /// <summary>
-        /// Austria
-        /// </summary>
-        AT,
-        /// <summary>
-        /// Belgium
-        /// </summary>
-        BE,
-        /// <summary>
-        /// Bulgaria
-        /// </summary>
-        BG,
-        /// <summary>
         /// Cyprus
         /// </summary>
         CY,
         /// <summary>
-        /// Czechia
+        /// Czech Republic
         /// </summary>
         CZ,
         /// <summary>
@@ -249,77 +108,57 @@ namespace CountryValidation
         /// </summary>
         DE,
         /// <summary>
-        /// Estonia
-        /// </summary>
-        EE,
-        /// <summary>
         /// Denmark
         /// </summary>
         DK,
         /// <summary>
-        /// Finland
+        /// Dominica Republic
         /// </summary>
-        FI,
+        DO,
         /// <summary>
-        /// France
+        /// Ecuador
         /// </summary>
-        FR,
+        EC,
         /// <summary>
-        /// Ireland
+        /// Estonia
         /// </summary>
-        IE,
-        /// <summary>
-        /// Italy
-        /// </summary>
-        IT,
-        /// <summary>
-        /// Latvia
-        /// </summary>
-        LV,
-        /// <summary>
-        /// Lithuania
-        /// </summary>
-        LT,
-        /// <summary>
-        /// Netherlands
-        /// </summary>
-        NL,
-        /// <summary>
-        /// Romania
-        /// </summary>
-        RO,
-        /// <summary>
-        /// Poland
-        /// </summary>
-        PL,
-        /// <summary>
-        /// Slovakia
-        /// </summary>
-        SK,
+        EE,
         /// <summary>
         /// Spain
         /// </summary>
         ES,
         /// <summary>
-        /// Sweden
+        /// Finland
         /// </summary>
-        SE,
+        FI,
         /// <summary>
-        /// Switzerland
+        /// Faroe Islands
         /// </summary>
-        CH,
+        FO,
         /// <summary>
-        /// United Kingdom
+        /// France
+        /// </summary>
+        FR,
+        /// <summary>
+        /// Great Britain
         /// </summary>
         GB,
         /// <summary>
-        /// United States
+        /// Georgia
         /// </summary>
-        US,
+        GE,
         /// <summary>
         /// Greece
         /// </summary>
         GR,
+        /// <summary>
+        /// Guatemala
+        /// </summary>
+        GT,
+        /// <summary>
+        /// Hong Kong
+        /// </summary>
+        HK,
         /// <summary>
         /// Croatia
         /// </summary>
@@ -329,32 +168,192 @@ namespace CountryValidation
         /// </summary>
         HU,
         /// <summary>
+        /// Indonesia
+        /// </summary>
+        ID,
+        /// <summary>
+        /// Ireland
+        /// </summary>
+        IE,
+        /// <summary>
+        /// Israel
+        /// </summary>
+        IL,
+        /// <summary>
+        /// India
+        /// </summary>
+        IN,
+        /// <summary>
+        /// Iceland
+        /// </summary>
+        IS,
+        /// <summary>
+        /// Italy
+        /// </summary>
+        IT,
+        /// <summary>
+        /// Japan
+        /// </summary>
+        JP,
+        /// <summary>
+        /// Korea
+        /// </summary>
+        KR,
+        /// <summary>
+        /// Kazahstan
+        /// </summary>
+        KZ,
+        /// <summary>
+        /// Lithuania
+        /// </summary>
+        LT,
+        /// <summary>
         /// Luxembourg
         /// </summary>
         LU,
         /// <summary>
-        /// Portugal
+        /// Latvia
         /// </summary>
-        PT,
+        LV,
         /// <summary>
-        /// Slovenia
+        /// Monaco
         /// </summary>
-        SI,
+        MC,
+        /// <summary>
+        /// Moldova
+        /// </summary>
+        MD,
+        /// <summary>
+        /// Montenegro
+        /// </summary>
+        ME,
+        /// <summary>
+        /// North Macedonia
+        /// </summary>
+        MK,
         /// <summary>
         /// Malta
         /// </summary>
         MT,
         /// <summary>
+        /// Mauritius
+        /// </summary>
+        MU,
+        /// <summary>
+        /// summary
+        /// </summary>
+        MX,
+        /// <summary>
+        /// Malaysia
+        /// </summary>
+        MY,
+        /// <summary>
+        /// Nigeria
+        /// </summary>
+        NG,
+        /// <summary>
+        /// Netherlands
+        /// </summary>
+        NL,
+        /// <summary>
+        /// Norway
+        /// </summary>
+        NO,
+        /// <summary>
+        /// New Zealand
+        /// </summary>
+        NZ,
+        /// <summary>
+        /// Peru
+        /// </summary>
+        PE,
+        /// <summary>
         /// Philippines
         /// </summary>
         PH,
+        /// <summary>
+        /// Pakistan
+        /// </summary>
+        PK,
+        /// <summary>
+        /// Poland
+        /// </summary>
+        PL,
+        /// <summary>
+        /// Portugal
+        /// </summary>
+        PT,
+        /// <summary>
+        /// Paraguay
+        /// </summary>
+        PY,
+        /// <summary>
+        /// Romania
+        /// </summary>
+        RO,
+        /// <summary>
+        /// Serbia
+        /// </summary>
+        RS,
+        /// <summary>
+        /// Russia
+        /// </summary>
+        RU,
+        /// <summary>
+        /// Sweden
+        /// </summary>
+        SE,
+        /// <summary>
+        /// Slovenia
+        /// </summary>
+        SI,
+        /// <summary>
+        /// Slovakia
+        /// </summary>
+        SK,
+        /// <summary>
+        /// San Marino
+        /// </summary>
+        SM,
+        /// <summary>
+        /// El Salvador
+        /// </summary>
+        SV,
+        /// <summary>
+        /// Thailand
+        /// </summary>
+        TH,
+        /// <summary>
+        /// Turkey
+        /// </summary>
+        TR,
+        /// <summary>
+        /// Taiwan
+        /// </summary>
+        TW,
+        /// <summary>
+        /// Ukraine
+        /// </summary>
+        UA,
+        /// <summary>
+        /// United States
+        /// </summary>
+        US,
+        /// <summary>
+        /// Uruguay
+        /// </summary>
+        UY,
         /// <summary>
         /// Uzbekistan
         /// </summary>
         UZ,
         /// <summary>
-        /// United Arab Erimates
+        /// Venezuela
         /// </summary>
-        AE
+        VE,
+        /// <summary>
+        /// South Africa
+        /// </summary>
+        ZA,
     }
 }

@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace CountryValidation.Countries
@@ -39,12 +36,17 @@ namespace CountryValidation.Countries
         /// <summary>
         /// OIB (Osobni identifikacijski broj, Croatian identification number)
         /// </summary>
-        /// <param name="vat"></param>
+        /// <param name="vatId"></param>
         /// <returns></returns>
-        public override ValidationResult ValidateVAT(string vat)
+        public override ValidationResult ValidateVAT(string vatId)
         {
-            vat = vat.RemoveSpecialCharacthers()?.ToUpper()?.Replace("HR", string.Empty);
-            if (!Regex.IsMatch(vat, @"^\d{11}$"))
+            if (vatId is null)
+            {
+                throw new ArgumentNullException(nameof(vatId));
+            }
+
+            vatId = vatId.RemoveSpecialCharacthers().ToUpper().Replace("HR", string.Empty);
+            if (!Regex.IsMatch(vatId, @"^\d{11}$"))
             {
                 return ValidationResult.InvalidFormat("12345678901");
             }
@@ -53,7 +55,7 @@ namespace CountryValidation.Countries
 
             for (int index = 0; index < 10; index++)
             {
-                int sum = (vat[index].ToInt() + product) % 10;
+                int sum = (vatId[index].ToInt() + product) % 10;
 
                 if (sum == 0)
                 {
@@ -63,7 +65,7 @@ namespace CountryValidation.Countries
                 product = 2 * sum % 11;
             }
 
-            int checkDigit = (product + vat[10].ToInt()) % 10;
+            int checkDigit = (product + vatId[10].ToInt()) % 10;
 
             bool isValid = checkDigit == 1;
 

@@ -56,7 +56,7 @@ namespace CountryValidation.Countries
 
             if (!Regex.IsMatch(cuit, @"^\d{11}$"))
             {
-                return ValidationResult.Invalid("12345678901");
+                return ValidationResult.InvalidFormat("12345678901");
             }
             else
             {
