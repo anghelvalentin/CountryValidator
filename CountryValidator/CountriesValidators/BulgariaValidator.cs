@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace CountryValidation.Countries
@@ -92,17 +89,17 @@ namespace CountryValidation.Countries
         /// <summary>
         /// Bulgarian VAT Number (VAT) (Идентификационен номер по ДДС)
         /// </summary>
-        /// <param name="vat"></param>
+        /// <param name="vatId"></param>
         /// <returns></returns>
-        public override ValidationResult ValidateVAT(string vat)
+        public override ValidationResult ValidateVAT(string vatId)
         {
-            vat = vat.RemoveSpecialCharacthers();
-            vat = vat.Replace("BG", string.Empty).Replace("bg", string.Empty);
-            if (!Regex.IsMatch(vat, @"^\d{9,10}$"))
+            vatId = vatId.RemoveSpecialCharacthers();
+            vatId = vatId.Replace("BG", string.Empty).Replace("bg", string.Empty);
+            if (!Regex.IsMatch(vatId, @"^\d{9,10}$"))
             {
                 return ValidationResult.InvalidFormat("123456789, 1234567890");
             }
-            return ValidateEntity(vat);
+            return ValidateEntity(vatId);
         }
 
         private static bool Bg9DigitsVat(string vat)

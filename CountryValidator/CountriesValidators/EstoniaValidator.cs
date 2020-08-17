@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace CountryValidation.Countries
@@ -14,25 +11,25 @@ namespace CountryValidation.Countries
         }
 
         /// <summary>
-        /// Registrikood (Estonian organisation registration code).
+        /// Registrikood (Estonian organisation registration code)
         /// </summary>
-        /// <param name="number"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
-        public override ValidationResult ValidateEntity(string number)
+        public override ValidationResult ValidateEntity(string id)
         {
-            if (!number.All(char.IsDigit))
+            if (!id.All(char.IsDigit))
             {
                 return ValidationResult.InvalidFormat("12345678");
             }
-            else if (number.Length != 8)
+            else if (id.Length != 8)
             {
                 return ValidationResult.InvalidLength();
             }
-            else if (!(number[0] == '1' || number[0] == '7' || number[0] == '8' || number[0] == '9'))
+            else if (!(id[0] == '1' || id[0] == '7' || id[0] == '8' || id[0] == '9'))
             {
                 return ValidationResult.Invalid("Invalid format. First digit must be 1 or 7 or 8 or 9");
             }
-            else if ((int)char.GetNumericValue(number[number.Length - 1]) != CalculateChecksum(number))
+            else if ((int)char.GetNumericValue(id[id.Length - 1]) != CalculateChecksum(id))
             {
                 return ValidationResult.InvalidChecksum();
             }

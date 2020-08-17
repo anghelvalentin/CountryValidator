@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using CountryValidation.Countries;
 
 namespace CountryValidation.Countries
 {
@@ -17,26 +14,26 @@ namespace CountryValidation.Countries
             return ValidateVAT(id);
         }
 
-        public override ValidationResult ValidateIndividualTaxCode(string ssn)
+        public override ValidationResult ValidateIndividualTaxCode(string id)
         {
-            return ValidateVAT(ssn);
+            return ValidateVAT(id);
         }
 
         /// <summary>
         /// Registro de Informacion Fiscal (RIF) 
         /// </summary>
-        /// <param name="rif"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
-        public override ValidationResult ValidateVAT(string rif)
+        public override ValidationResult ValidateVAT(string id)
         {
-            rif = rif.RemoveSpecialCharacthers();
-            rif = rif?.Replace("VE", string.Empty).Replace("ve", string.Empty);
+            id = id.RemoveSpecialCharacthers();
+            id = id?.Replace("VE", string.Empty).Replace("ve", string.Empty);
 
-            if (rif.Length != 10)
+            if (id.Length != 10)
             {
                 return ValidationResult.Invalid("Invalid length");
             }
-            else if (!Regex.IsMatch(rif, "^[VEJPG][0-9]{9}$"))
+            else if (!Regex.IsMatch(id, "^[VEJPG][0-9]{9}$"))
             {
                 return ValidationResult.InvalidFormat("[VEJPG]123456789");
             }
@@ -50,12 +47,12 @@ namespace CountryValidation.Countries
                 { 'G', 20}//government
             };
 
-            var sum = types[rif[0]];
+            var sum = types[id[0]];
             var weight = new int[] { 3, 2, 7, 6, 5, 4, 3, 2 };
 
             for (var i = 0; i < 8; i++)
             {
-                sum += int.Parse(rif[i + 1].ToString()) * weight[i];
+                sum += int.Parse(id[i + 1].ToString()) * weight[i];
             }
 
             sum = 11 - sum % 11;
@@ -64,7 +61,7 @@ namespace CountryValidation.Countries
                 sum = 0;
             }
 
-            bool isValid = sum.ToString() == rif.Substring(9, 1);
+            bool isValid = sum.ToString() == id.Substring(9, 1);
             return isValid ? ValidationResult.Success() : ValidationResult.InvalidChecksum();
         }
 

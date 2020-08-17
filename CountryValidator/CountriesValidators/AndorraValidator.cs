@@ -1,8 +1,4 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using System.Text.RegularExpressions;
 
 
@@ -18,46 +14,46 @@ namespace CountryValidation.Countries
         /// <summary>
         /// NRT (Número de Registre Tributari, Andorra tax number)
         /// </summary>
-        /// <param name="nrt"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
-        public override ValidationResult ValidateEntity(string nrt)
+        public override ValidationResult ValidateEntity(string id)
         {
-            return ValidateVAT(nrt);
+            return ValidateVAT(id);
         }
 
         /// <summary>
         /// NRT (Número de Registre Tributari, Andorra tax number)
         /// </summary>
-        /// <param name="nrt"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
         /// https://www.oecd.org/tax/automatic-exchange/crs-implementation-and-assistance/tax-identification-numbers/Andorra-TIN.pdf
-        public override ValidationResult ValidateIndividualTaxCode(string nrt)
+        public override ValidationResult ValidateIndividualTaxCode(string id)
         {
-            nrt = nrt.RemoveSpecialCharacthers();
-            nrt = nrt.Replace("AD", string.Empty).Replace("ad", string.Empty);
+            id = id.RemoveSpecialCharacthers();
+            id = id.Replace("AD", string.Empty).Replace("ad", string.Empty);
 
-            if (nrt.Length != 8)
+            if (id.Length != 8)
             {
                 return ValidationResult.InvalidLength();
             }
 
-            if (!char.IsLetter(nrt[0]) || !char.IsLetter(nrt[nrt.Length - 1]))
+            if (!char.IsLetter(id[0]) || !char.IsLetter(id[id.Length - 1]))
             {
                 return ValidationResult.Invalid("Invalid format. First and last character must be letters");
             }
-            else if (!nrt.Substring(1, 6).All(char.IsDigit))
+            else if (!id.Substring(1, 6).All(char.IsDigit))
             {
                 return ValidationResult.InvalidFormat("F-123456-Z");
             }
-            else if (!Regex.IsMatch(nrt, "^[ACDEFGLOPU]"))
+            else if (!Regex.IsMatch(id, "^[ACDEFGLOPU]"))
             {
                 return ValidationResult.Invalid("Invalid format. First letter must be ACDEFGLOPU");
             }
-            else if (nrt[0] == 'F' && int.Parse(nrt.Substring(1, 6)) > 699999)
+            else if (id[0] == 'F' && int.Parse(id.Substring(1, 6)) > 699999)
             {
                 return ValidationResult.Invalid("Invalid format.The number code cannot be higher than 699999");
             }
-            if ((nrt[0] == 'A' || nrt[0] == 'L') && !(699999 < int.Parse(nrt.Substring(1, 6)) && int.Parse(nrt.Substring(1, 6)) < 800000))
+            if ((id[0] == 'A' || id[0] == 'L') && !(699999 < int.Parse(id.Substring(1, 6)) && int.Parse(id.Substring(1, 6)) < 800000))
             {
                 return ValidationResult.Invalid("Invalid format.The number code must be between 699999 and 800000");
             }
@@ -68,39 +64,11 @@ namespace CountryValidation.Countries
         /// <summary>
         /// NRT (Número de Registre Tributari, Andorra tax number)
         /// </summary>
-        /// <param name="nrt"></param>
+        /// <param name="vatId"></param>
         /// <returns></returns>
-        public override ValidationResult ValidateVAT(string nrt)
+        public override ValidationResult ValidateVAT(string vatId)
         {
-            nrt = nrt.RemoveSpecialCharacthers();
-            nrt = nrt.Replace("AD", string.Empty).Replace("ad", string.Empty);
-
-            if (nrt.Length != 8)
-            {
-                return ValidationResult.InvalidLength();
-            }
-
-            if (!char.IsLetter(nrt[0]) || !char.IsLetter(nrt[nrt.Length - 1]))
-            {
-                return ValidationResult.Invalid("Invalid format. First and last character must be letters");
-            }
-            else if (!nrt.Substring(1, 6).All(char.IsDigit))
-            {
-                return ValidationResult.InvalidFormat("F-123456-Z");
-            }
-            else if (!Regex.IsMatch(nrt, "^[ACDEFGLOPU]"))
-            {
-                return ValidationResult.Invalid("Invalid format. First letter must be ACDEFGLOPU");
-            }
-            else if (nrt[0] == 'F' && int.Parse(nrt.Substring(1, 6)) > 699999)
-            {
-                return ValidationResult.Invalid("Invalid format.The number code cannot be higher than 699999");
-            }
-            if ((nrt[0] == 'A' || nrt[0] == 'L') && !(699999 < int.Parse(nrt.Substring(1, 6)) && int.Parse(nrt.Substring(1, 6)) < 800000))
-            {
-                return ValidationResult.Invalid("Invalid format.The number code must be between 699999 and 800000");
-            }
-            return ValidationResult.Success();
+            return ValidateEntity(vatId);
         }
 
         public override ValidationResult ValidatePostalCode(string postalCode)

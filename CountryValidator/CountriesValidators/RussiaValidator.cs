@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace CountryValidation.Countries
@@ -17,53 +14,53 @@ namespace CountryValidation.Countries
         /// <summary>
         /// Validate Taxpayer Personal Identification Number (INN) 
         /// </summary>
-        /// <param name="inn"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
-        public override ValidationResult ValidateIndividualTaxCode(string inn)
+        public override ValidationResult ValidateIndividualTaxCode(string id)
         {
-            inn = inn.RemoveSpecialCharacthers();
-            if (!Regex.IsMatch(inn, @"^\d{10}$") && !Regex.IsMatch(inn, @"^\d{12}$"))
+            id = id.RemoveSpecialCharacthers();
+            if (!Regex.IsMatch(id, @"^\d{10}$") && !Regex.IsMatch(id, @"^\d{12}$"))
             {
                 return ValidationResult.InvalidFormat("123456789");
             }
-            else if ((inn.Length == 10)
-            && (int.Parse(inn[9].ToString()) ==
-            ((2 * int.Parse(inn[0].ToString()) + 4 * int.Parse(inn[1].ToString()) + 10 * int.Parse(inn[2].ToString()) + 3 * int.Parse(inn[3].ToString()) + 5 * int.Parse(inn[4].ToString())
-            + 9 * int.Parse(inn[5].ToString()) + 4 * int.Parse(inn[6].ToString()) + 6 * int.Parse(inn[7].ToString()) + 8 * int.Parse(inn[8].ToString())) % 11) % 10))
+            else if ((id.Length == 10)
+            && (int.Parse(id[9].ToString()) ==
+            ((2 * int.Parse(id[0].ToString()) + 4 * int.Parse(id[1].ToString()) + 10 * int.Parse(id[2].ToString()) + 3 * int.Parse(id[3].ToString()) + 5 * int.Parse(id[4].ToString())
+            + 9 * int.Parse(id[5].ToString()) + 4 * int.Parse(id[6].ToString()) + 6 * int.Parse(id[7].ToString()) + 8 * int.Parse(id[8].ToString())) % 11) % 10))
             {
                 return ValidationResult.Success();
             }
-            else if (inn.Length != 12)
+            else if (id.Length != 12)
             {
                 return ValidationResult.Invalid("Invalid length");
             }
 
-            int checkDigit10 = int.Parse(inn[10].ToString());
-            int calculatedDigit10 = ((7 * int.Parse(inn[0].ToString())
-                + 2 * int.Parse(inn[1].ToString())
-                + 4 * int.Parse(inn[2].ToString())
-                + 10 * int.Parse(inn[3].ToString())
-                + 3 * int.Parse(inn[4].ToString())
-                + 5 * int.Parse(inn[5].ToString())
-                + 9 * int.Parse(inn[6].ToString())
-                + 4 * int.Parse(inn[7].ToString())
-                + 6 * int.Parse(inn[8].ToString())
-                + 8 * int.Parse(inn[9].ToString())) % 11) % 10;
+            int checkDigit10 = int.Parse(id[10].ToString());
+            int calculatedDigit10 = ((7 * int.Parse(id[0].ToString())
+                + 2 * int.Parse(id[1].ToString())
+                + 4 * int.Parse(id[2].ToString())
+                + 10 * int.Parse(id[3].ToString())
+                + 3 * int.Parse(id[4].ToString())
+                + 5 * int.Parse(id[5].ToString())
+                + 9 * int.Parse(id[6].ToString())
+                + 4 * int.Parse(id[7].ToString())
+                + 6 * int.Parse(id[8].ToString())
+                + 8 * int.Parse(id[9].ToString())) % 11) % 10;
 
-            int checkDigit11 = int.Parse(inn[11].ToString());
+            int checkDigit11 = int.Parse(id[11].ToString());
             int calculatedDigit11 = (
                 (
-                  3 * int.Parse(inn[0].ToString())
-                + 7 * int.Parse(inn[1].ToString())
-                + 2 * int.Parse(inn[2].ToString())
-                + 4 * int.Parse(inn[3].ToString())
-               + 10 * int.Parse(inn[4].ToString())
-                + 3 * int.Parse(inn[5].ToString())
-                + 5 * int.Parse(inn[6].ToString())
-                + 9 * int.Parse(inn[7].ToString())
-                + 4 * int.Parse(inn[8].ToString())
-                + 6 * int.Parse(inn[9].ToString())
-                + 8 * int.Parse(inn[10].ToString())) % 11) % 10;
+                  3 * int.Parse(id[0].ToString())
+                + 7 * int.Parse(id[1].ToString())
+                + 2 * int.Parse(id[2].ToString())
+                + 4 * int.Parse(id[3].ToString())
+               + 10 * int.Parse(id[4].ToString())
+                + 3 * int.Parse(id[5].ToString())
+                + 5 * int.Parse(id[6].ToString())
+                + 9 * int.Parse(id[7].ToString())
+                + 4 * int.Parse(id[8].ToString())
+                + 6 * int.Parse(id[9].ToString())
+                + 8 * int.Parse(id[10].ToString())) % 11) % 10;
 
             bool isValid = checkDigit10 == calculatedDigit10 && checkDigit11 == calculatedDigit11;
 

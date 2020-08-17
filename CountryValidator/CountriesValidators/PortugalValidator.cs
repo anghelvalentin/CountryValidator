@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace CountryValidation.Countries
@@ -218,25 +216,25 @@ namespace CountryValidation.Countries
         /// <summary>
         /// Numero de Identificacao Fiscal (NIF) 
         /// </summary>
-        /// <param name="vat"></param>
+        /// <param name="vatId"></param>
         /// <returns></returns>
-        public override ValidationResult ValidateVAT(string vat)
+        public override ValidationResult ValidateVAT(string vatId)
         {
-            vat = vat.RemoveSpecialCharacthers();
-            vat = vat.Replace("PT", string.Empty).Replace("pt", string.Empty);
+            vatId = vatId.RemoveSpecialCharacthers();
+            vatId = vatId.Replace("PT", string.Empty).Replace("pt", string.Empty);
             int[] multipliers = { 9, 8, 7, 6, 5, 4, 3, 2 };
 
-            if (!Regex.IsMatch(vat, @"^\d{9}$"))
+            if (!Regex.IsMatch(vatId, @"^\d{9}$"))
             {
                 return ValidationResult.InvalidFormat("123456789");
 
             }
-            else if (Regex.IsMatch(vat, "^[123]"))
+            else if (Regex.IsMatch(vatId, "^[123]"))
             {
                 return ValidationResult.Invalid("Invalid code. This is not a company nif.");
             }
 
-            var sum = vat.Sum(multipliers);
+            var sum = vatId.Sum(multipliers);
 
             var checkDigit = 11 - sum % 11;
 
@@ -244,7 +242,7 @@ namespace CountryValidation.Countries
             {
                 checkDigit = 0;
             }
-            bool isValid = checkDigit == vat[8].ToInt();
+            bool isValid = checkDigit == vatId[8].ToInt();
             return isValid ? ValidationResult.Success() : ValidationResult.InvalidChecksum();
         }
 

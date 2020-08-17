@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace CountryValidation.Countries
@@ -82,7 +79,7 @@ namespace CountryValidation.Countries
 
         public override ValidationResult ValidateEntity(string id)
         {
-            throw new NotImplementedException();
+            return ValidateVAT(id);
         }
 
         public override ValidationResult ValidateIndividualTaxCode(string ssn)

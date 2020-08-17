@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace CountryValidation.Countries
@@ -151,9 +149,9 @@ namespace CountryValidation.Countries
         {
             id = id.RemoveSpecialCharacthers();
             var total = 0;
-            var temp = 0;
             var multipliers = new int[] { 2, 1, 2, 1, 2, 1, 2 };
 
+            int temp;
             if (Regex.IsMatch(id, @"^[A-H|J|U|V]\d{8}$"))
             {
 
@@ -161,9 +159,13 @@ namespace CountryValidation.Countries
                 {
                     temp = int.Parse(id[i + 1].ToString()) * multipliers[i];
                     if (temp > 9)
+                    {
                         total += (int)Math.Floor((decimal)temp / 10) + temp % 10;
+                    }
                     else
+                    {
                         total += temp;
+                    }
                 }
                 total = 10 - total % 10;
                 if (total == 10) { total = 0; }
@@ -207,18 +209,18 @@ namespace CountryValidation.Countries
             return ValidationResult.Invalid("Invalid");
         }
 
-        public override ValidationResult ValidateVAT(string vatnumber)
+        public override ValidationResult ValidateVAT(string vatId)
         {
-            vatnumber = vatnumber.RemoveSpecialCharacthers();
+            vatId = vatId.RemoveSpecialCharacthers();
 
-            ValidationResult result = ValidateEntity(vatnumber);
+            ValidationResult result = ValidateEntity(vatId);
             if (result.IsValid)
             {
                 return ValidationResult.Success();
             }
-            else if (Regex.IsMatch(vatnumber, @"^[0-9|Y|Z]\d{7}[A-Z]$"))
+            else if (Regex.IsMatch(vatId, @"^[0-9|Y|Z]\d{7}[A-Z]$"))
             {
-                var tempnumber = vatnumber;
+                var tempnumber = vatId;
                 if (tempnumber[0] == 'Y')
                 {
                     tempnumber = tempnumber.Replace("Y", "1");
@@ -231,9 +233,9 @@ namespace CountryValidation.Countries
                 bool isValid = tempnumber[8] == "TRWAGMYFPDXBNJZSQVHLCKE"[int.Parse(tempnumber.Substring(0, 8)) % 23];
                 return isValid ? ValidationResult.Success() : ValidationResult.InvalidChecksum();
             }
-            else if (Regex.IsMatch(vatnumber, @"^[K|L|M|X]\d{7}[A-Z]$"))
+            else if (Regex.IsMatch(vatId, @"^[K|L|M|X]\d{7}[A-Z]$"))
             {
-                bool isValid = vatnumber[8] == "TRWAGMYFPDXBNJZSQVHLCKE"[int.Parse(vatnumber.Substring(1, 7)) % 23];
+                bool isValid = vatId[8] == "TRWAGMYFPDXBNJZSQVHLCKE"[int.Parse(vatId.Substring(1, 7)) % 23];
                 return isValid ? ValidationResult.Success() : ValidationResult.InvalidChecksum();
 
             }

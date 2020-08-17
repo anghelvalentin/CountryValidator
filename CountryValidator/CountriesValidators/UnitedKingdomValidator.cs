@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 
 
@@ -27,7 +25,7 @@ namespace CountryValidation.Countries
         /// <returns></returns>
         public override ValidationResult ValidateNationalIdentity(string ssn)
         {
-            ssn = ssn.RemoveSpecialCharacthers();
+            ssn = ssn?.RemoveSpecialCharacthers();
             if (ValidateIndividualTaxCode(ssn).IsValid)
             {
                 return ValidationResult.Success();
@@ -39,19 +37,19 @@ namespace CountryValidation.Countries
             return ValidationResult.Invalid("Invalid");
         }
 
-        public override ValidationResult ValidateIndividualTaxCode(string nino)
+        public override ValidationResult ValidateIndividualTaxCode(string id)
         {
-            if (string.IsNullOrWhiteSpace(nino))
+            if (string.IsNullOrWhiteSpace(id))
             {
                 return ValidationResult.Invalid("Emtpy nino");
             }
-            bool isValid = Regex.IsMatch(nino, "^(?!BG|GB|NK|KN|TN|NT|ZZ)((?![DFIQUV])([A-Z])(?![DFIQUVO])([A-Z]))[0-9]{6}[A-D ]$");
+            bool isValid = Regex.IsMatch(id, "^(?!BG|GB|NK|KN|TN|NT|ZZ)((?![DFIQUV])([A-Z])(?![DFIQUVO])([A-Z]))[0-9]{6}[A-D ]$");
             return isValid ? ValidationResult.Success() : ValidationResult.Invalid("Invalid format");
         }
 
         public ValidationResult ValidateNHS(string ssn)
         {
-            ssn = ssn.RemoveSpecialCharacthers();
+            ssn = ssn?.RemoveSpecialCharacthers();
             if (ssn.Length != 10 || !ssn.All(char.IsDigit))
             {
                 return ValidationResult.InvalidFormat("1234567890");
@@ -80,50 +78,50 @@ namespace CountryValidation.Countries
         /// <summary>
         /// Value added tax registration number 
         /// </summary>
-        /// <param name="vatNumber"></param>
+        /// <param name="vatId"></param>
         /// <returns></returns>
-        public override ValidationResult ValidateVAT(string vatNumber)
+        public override ValidationResult ValidateVAT(string vatId)
         {
-            vatNumber = vatNumber.RemoveSpecialCharacthers();
-            vatNumber = vatNumber.Replace("gb", string.Empty).Replace("GB", string.Empty);
+            vatId = vatId?.RemoveSpecialCharacthers();
+            vatId = vatId.Replace("gb", string.Empty).Replace("GB", string.Empty);
             var multipliers = new int[] { 8, 7, 6, 5, 4, 3, 2 };
 
-            if (vatNumber.Substring(0, 2) == "GD")
+            if (vatId.Substring(0, 2) == "GD")
             {
-                bool isValidGD = int.Parse(vatNumber.Substring(2, 3)) < 500;
+                bool isValidGD = int.Parse(vatId.Substring(2, 3)) < 500;
                 return isValidGD ? ValidationResult.Success() : ValidationResult.Invalid("Invalid");
             }
-            else if (vatNumber.Substring(0, 2) == "HA")
+            else if (vatId.Substring(0, 2) == "HA")
             {
-                bool isValidHA = int.Parse(vatNumber.Substring(2, 3)) > 499;
+                bool isValidHA = int.Parse(vatId.Substring(2, 3)) > 499;
                 return isValidHA ? ValidationResult.Success() : ValidationResult.Invalid("Invalid");
             }
 
             var total = 0;
-            if (vatNumber[0] == '0')
+            if (vatId[0] == '0')
             {
                 return ValidationResult.Invalid("Invalid format. First digit cannot be 0");
             }
 
-            var no = long.Parse(vatNumber.Substring(0, 7));
+            var no = long.Parse(vatId.Substring(0, 7));
 
             for (int i = 0; i < 7; i++)
             {
-                total += int.Parse(vatNumber[i].ToString()) * multipliers[i];
+                total += int.Parse(vatId[i].ToString()) * multipliers[i];
             }
 
             var cd = total;
             while (cd > 0) { cd = cd - 97; }
 
             cd = Math.Abs(cd);
-            if (cd == int.Parse(vatNumber.Substring(7, 2)) && no < 9990001 && (no < 100000 || no > 999999) && (no < 9490001 || no > 9700000))
+            if (cd == int.Parse(vatId.Substring(7, 2)) && no < 9990001 && (no < 100000 || no > 999999) && (no < 9490001 || no > 9700000))
             {
                 return ValidationResult.Success();
             }
 
             cd = cd >= 55 ? cd - 55 : cd + 42;
 
-            bool isValid = cd == int.Parse(vatNumber.Substring(7, 2)) && no > 1000000;
+            bool isValid = cd == int.Parse(vatId.Substring(7, 2)) && no > 1000000;
 
             return isValid ? ValidationResult.Success() : ValidationResult.InvalidChecksum();
         }

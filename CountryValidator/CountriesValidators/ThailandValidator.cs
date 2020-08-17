@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace CountryValidation.Countries
@@ -15,12 +13,12 @@ namespace CountryValidation.Countries
         /// <summary>
         /// Validate Thailand citizen number
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="ssn"></param>
         /// <returns></returns>
-        public override ValidationResult ValidateNationalIdentity(string value)
+        public override ValidationResult ValidateNationalIdentity(string ssn)
         {
-            value = value.RemoveSpecialCharacthers();
-            if (value.Length != 13)
+            ssn = ssn.RemoveSpecialCharacthers();
+            if (ssn.Length != 13)
             {
                 return ValidationResult.InvalidLength();
             }
@@ -28,10 +26,10 @@ namespace CountryValidation.Countries
             var sum = 0;
             for (var i = 0; i < 12; i++)
             {
-                sum += (int)Char.GetNumericValue(value[i]) * (13 - i);
+                sum += (int)Char.GetNumericValue(ssn[i]) * (13 - i);
             }
 
-            return (11 - sum % 11).Mod(10) == (int)char.GetNumericValue(value[12]) ? ValidationResult.Success() : ValidationResult.InvalidChecksum();
+            return (11 - sum % 11).Mod(10) == (int)char.GetNumericValue(ssn[12]) ? ValidationResult.Success() : ValidationResult.InvalidChecksum();
 
         }
 

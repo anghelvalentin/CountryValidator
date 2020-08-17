@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace CountryValidation.Countries
@@ -13,14 +10,14 @@ namespace CountryValidation.Countries
             throw new NotImplementedException();
         }
 
-        public override ValidationResult ValidateIndividualTaxCode(string ssn)
+        public override ValidationResult ValidateIndividualTaxCode(string id)
         {
-            ssn = ssn.RemoveSpecialCharacthers();
+            id = id.RemoveSpecialCharacthers();
 
             int getLetterValue(string letter)
             {
                 return letter[0] - 55;
-            };
+            }
 
             bool isLetter(string ch)
             {
@@ -28,7 +25,7 @@ namespace CountryValidation.Countries
 
             }
 
-            if (!(ssn.Length == 8 || ssn.Length == 9))
+            if (!(id.Length == 8 || id.Length == 9))
             {
                 return ValidationResult.Invalid("Invalid length. The code should have 8 or 9 charachters");
             }
@@ -37,10 +34,10 @@ namespace CountryValidation.Countries
                 return ValidationResult.Invalid("Invalid format");
             }
 
-            int weight = ssn.Length;
+            int weight = id.Length;
             int weightedSum = weight == 8 ? 324 : 0;
-            string identifier = ssn.Substring(0, ssn.Length - 1);
-            int checkDigit = ssn.Substring(ssn.Length - 1) == "A" ? 10 : int.Parse(ssn.Substring(ssn.Length - 1));
+            string identifier = id.Substring(0, id.Length - 1);
+            int checkDigit = id.Substring(id.Length - 1) == "A" ? 10 : int.Parse(id.Substring(id.Length - 1));
 
             for (int i = 0; i < identifier.Length; i++)
             {

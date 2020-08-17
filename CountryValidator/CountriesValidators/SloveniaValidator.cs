@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace CountryValidation.Countries
@@ -43,6 +40,7 @@ namespace CountryValidation.Countries
                 {
                     year = 2000 + year;
                 }
+
                 DateTime date = new DateTime(year, month, day);
             }
             catch
@@ -99,21 +97,21 @@ namespace CountryValidation.Countries
         /// <summary>
         /// Identifikacijska številka za DDV
         /// </summary>
-        /// <param name="vat"></param>
+        /// <param name="vatId"></param>
         /// <returns></returns>
-        public override ValidationResult ValidateVAT(string vat)
+        public override ValidationResult ValidateVAT(string vatId)
         {
-            vat = vat.RemoveSpecialCharacthers();
-            vat = vat.Replace("si", string.Empty).Replace("SI", string.Empty);
+            vatId = vatId.RemoveSpecialCharacthers();
+            vatId = vatId.Replace("si", string.Empty).Replace("SI", string.Empty);
 
-            if (!Regex.IsMatch(vat, @"^[1-9]\d{7}$"))
+            if (!Regex.IsMatch(vatId, @"^[1-9]\d{7}$"))
             {
                 return ValidationResult.InvalidFormat("12345678");
             }
 
             int[] multipliers = { 8, 7, 6, 5, 4, 3, 2 };
 
-            var sum = vat.Sum(multipliers);
+            var sum = vatId.Sum(multipliers);
 
             var checkDigit = 11 - sum % 11;
 
@@ -122,7 +120,7 @@ namespace CountryValidation.Countries
                 checkDigit = 0;
             }
 
-            bool isValid = checkDigit == vat[7].ToInt();
+            bool isValid = checkDigit == vatId[7].ToInt();
             return isValid ? ValidationResult.Success() : ValidationResult.InvalidChecksum();
         }
 

@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using CountryValidation.Countries;
 
 namespace CountryValidation.Countries
 {
     public class GermanyValidator : IdValidationAbstract
     {
-        Dictionary<string, string[]> regions = new Dictionary<string, string[]>()
+        readonly Dictionary<string, string[]> regions = new Dictionary<string, string[]>()
         {
         {"Baden-Württemberg", new string[]{
                  @"\A(?<ff>\d{2})(?<bbb>\d{3})[\/]?(?<uuuu>\d{4})(?<p>\d{1})\z",
@@ -72,14 +70,14 @@ namespace CountryValidation.Countries
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public override ValidationResult ValidateEntity(string number)
+        public override ValidationResult ValidateEntity(string id)
         {
-            number = number.RemoveSpecialCharacthers();
-            if (!number.All(char.IsDigit))
+            id = id.RemoveSpecialCharacthers();
+            if (!id.All(char.IsDigit))
             {
                 return ValidationResult.Invalid("Invalid format. Only numbers are allowed");
             }
-            else if (!(number.Length == 10 || number.Length == 11 || number.Length == 13))
+            else if (!(id.Length == 10 || id.Length == 11 || id.Length == 13))
             {
                 return ValidationResult.InvalidLength();
             }
@@ -88,7 +86,7 @@ namespace CountryValidation.Countries
             {
                 for (int i = 0; i < item.Value.Length; i++)
                 {
-                    if (Regex.IsMatch(number, item.Value[i]))
+                    if (Regex.IsMatch(id, item.Value[i]))
                     {
                         return ValidationResult.Success();
                     }
@@ -100,22 +98,22 @@ namespace CountryValidation.Countries
         /// <summary>
         /// Validate German Tax Id Steueridentifikationsnummer
         /// </summary>
-        /// <param name="taxNumber"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
-        public override ValidationResult ValidateIndividualTaxCode(string taxNumber)
+        public override ValidationResult ValidateIndividualTaxCode(string id)
         {
-            taxNumber = taxNumber.RemoveSpecialCharacthers();
-            if (!Regex.IsMatch(taxNumber, @"^\d{11}$"))
+            id = id.RemoveSpecialCharacthers();
+            if (!Regex.IsMatch(id, @"^\d{11}$"))
             {
                 return ValidationResult.InvalidFormat("01234567890");
             }
 
-            else if (taxNumber[0] == '0')
+            else if (id[0] == '0')
             {
                 return ValidationResult.Invalid("Invalid format. The first digit is always 0");
             }
 
-            char[] digits = taxNumber.ToCharArray();
+            char[] digits = id.ToCharArray();
             var first10Digits = digits.Take(10);
 
 
@@ -143,20 +141,20 @@ namespace CountryValidation.Countries
                 checksum = 0;
             }
 
-            bool isValid = int.Parse(taxNumber[10].ToString()) == checksum;
+            bool isValid = int.Parse(id[10].ToString()) == checksum;
             return isValid ? ValidationResult.Success() : ValidationResult.InvalidChecksum();
         }
 
         /// <summary>
         /// Umsatzsteur Identifikationnummer (VAT)  
         /// </summary>
-        /// <param name="vat"></param>
+        /// <param name="vatId"></param>
         /// <returns></returns>
-        public override ValidationResult ValidateVAT(string vat)
+        public override ValidationResult ValidateVAT(string vatId)
         {
-            vat = vat.RemoveSpecialCharacthers();
-            vat = vat.Replace("DE", string.Empty).Replace("de", string.Empty);
-            if (!Regex.IsMatch(vat, @"^[1-9]\d{8}$"))
+            vatId = vatId.RemoveSpecialCharacthers();
+            vatId = vatId.Replace("DE", string.Empty).Replace("de", string.Empty);
+            if (!Regex.IsMatch(vatId, @"^[1-9]\d{8}$"))
             {
                 return ValidationResult.InvalidFormat("123456789");
             }
@@ -164,7 +162,7 @@ namespace CountryValidation.Countries
             var product = 10;
             for (var index = 0; index < 8; index++)
             {
-                var sum = (vat[index].ToInt() + product) % 10;
+                var sum = (vatId[index].ToInt() + product) % 10;
                 if (sum == 0)
                 {
                     sum = 10;
@@ -178,7 +176,7 @@ namespace CountryValidation.Countries
                 ? 0
                 : val;
 
-            bool isValid = checkDigit == vat[8].ToInt();
+            bool isValid = checkDigit == vatId[8].ToInt();
             return isValid ? ValidationResult.Success() : ValidationResult.InvalidChecksum();
         }
 

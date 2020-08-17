@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace CountryValidation.Countries
@@ -16,18 +13,18 @@ namespace CountryValidation.Countries
         /// <summary>
         /// Payer's account number (UNP)
         /// </summary>
-        /// <param name="number"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
-        public override ValidationResult ValidateEntity(string number)
+        public override ValidationResult ValidateEntity(string id)
         {
-            number = number?.Replace("УНП", string.Empty).Replace("UNP", string.Empty);
-            number = number.Translit();
-            number = number.RemoveSpecialCharacthers();
-            if (!Regex.IsMatch(number, "^[AaBbCcEeHhKkMmOoPpTt]{2}"))
+            id = id?.Replace("УНП", string.Empty).Replace("UNP", string.Empty);
+            id = id.Translit();
+            id = id.RemoveSpecialCharacthers();
+            if (!Regex.IsMatch(id, "^[AaBbCcEeHhKkMmOoPpTt]{2}"))
             {
                 return ValidationResult.Invalid("Invalid format");
             }
-            return ValidateUNP(number);
+            return ValidateUNP(id);
         }
 
         /// <summary>

@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace CountryValidation.Countries
@@ -22,13 +19,13 @@ namespace CountryValidation.Countries
         /// <summary>
         /// Validate CNIC (Computerized National Identity Card)
         /// </summary>
-        /// <param name="cnic"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
-        public override ValidationResult ValidateIndividualTaxCode(string cnic)
+        public override ValidationResult ValidateIndividualTaxCode(string id)
         {
-            cnic = cnic.Trim();
+            id = id.Trim();
 
-            var isValid = Regex.IsMatch(cnic, "^[1-7][0-9]{4}-[0-9]{7}-[1-9]{1}$");
+            var isValid = Regex.IsMatch(id, "^[1-7][0-9]{4}-[0-9]{7}-[1-9]{1}$");
             if (isValid)
             {
                 return ValidationResult.Success();

@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace CountryValidation.Countries
@@ -16,9 +14,9 @@ namespace CountryValidation.Countries
         private int[] _notAvailableNumbers = new int[]
         {
              2, 4, 6, 7, 8, 9, 10, 11, 13, 16, 18, 19, 20, 21, 25, 26, 30, 32, 33, 35,
-    36, 37, 38, 39, 40, 42, 45, 47, 49, 51, 52, 55, 56, 57, 58, 59, 61, 62,
-    64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 79, 80, 81, 84, 85,
-    87, 88, 91, 92, 94, 95, 96, 97, 99
+             36, 37, 38, 39, 40, 42, 45, 47, 49, 51, 52, 55, 56, 57, 58, 59, 61, 62,
+             64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 79, 80, 81, 84, 85,
+             87, 88, 91, 92, 94, 95, 96, 97, 99
         };
 
 
@@ -26,21 +24,21 @@ namespace CountryValidation.Countries
         /// <summary>
         /// COE (Codice operatore economico, San Marino national tax number).
         /// </summary>
-        /// <param name="coe"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
-        public override ValidationResult ValidateEntity(string coe)
+        public override ValidationResult ValidateEntity(string id)
         {
-            return ValidateVAT(coe);
+            return ValidateVAT(id);
         }
 
 
-        public override ValidationResult ValidateIndividualTaxCode(string ssn)
+        public override ValidationResult ValidateIndividualTaxCode(string id)
         {
-            if (ValidateVAT(ssn).IsValid)
+            if (ValidateVAT(id).IsValid)
             {
                 return ValidationResult.Success();
             }
-            else if (!Regex.IsMatch(ssn, @"^\d{9}$"))
+            else if (!Regex.IsMatch(id, @"^\d{9}$"))
             {
                 return ValidationResult.Success();
             }
@@ -48,7 +46,7 @@ namespace CountryValidation.Countries
         }
 
         /// <summary>
-        /// COE (Codice operatore economico, San Marino national tax number).
+        /// COE (Codice operatore economico, San Marino national tax number)
         /// </summary>
         /// <param name="coe"></param>
         /// <returns></returns>

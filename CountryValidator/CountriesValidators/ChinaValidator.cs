@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace CountryValidation.Countries
@@ -14,21 +11,21 @@ namespace CountryValidation.Countries
             return (int)Math.Pow(2, n - 1) % 11;
         }
 
-        public override ValidationResult ValidateIndividualTaxCode(string ssn)
+        public override ValidationResult ValidateIndividualTaxCode(string id)
         {
-            ssn = ssn.RemoveSpecialCharacthers();
-            if (ssn.Length != 18)
+            id = id.RemoveSpecialCharacthers();
+            if (id.Length != 18)
             {
                 return ValidationResult.Invalid("Invalid length! The code must have a length of 18");
             }
 
 
-            if (!Regex.IsMatch(ssn, "^[0-9]{17}[0-9X]$"))
+            if (!Regex.IsMatch(id, "^[0-9]{17}[0-9X]$"))
             {
                 return ValidationResult.InvalidFormat("123456YYYYMMDD123X where YYYYMMDD - date of birth, X - checksum");
             }
 
-            string dateString = ssn.Substring(6, 8);
+            string dateString = id.Substring(6, 8);
             try
             {
                 DateTime data = DateTime.ParseExact(dateString, "yyyyMMdd", CultureInfo.InvariantCulture);
@@ -47,12 +44,12 @@ namespace CountryValidation.Countries
             string identifier;
             int remainder;
 
-            identifier = ssn.Substring(0, 17);
-            checkDigit = int.Parse(ssn.Substring(17) == "X" ? "10" : ssn.Substring(17));
+            identifier = id.Substring(0, 17);
+            checkDigit = int.Parse(id.Substring(17) == "X" ? "10" : id.Substring(17));
 
 
             int weightedSum = 0;
-            int index = ssn.Length;
+            int index = id.Length;
 
             for (int i = 0, len = identifier.Length; i < len; i++)
             {

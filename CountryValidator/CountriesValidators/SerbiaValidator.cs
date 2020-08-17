@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace CountryValidation.Countries
@@ -96,12 +93,12 @@ namespace CountryValidation.Countries
         /// <summary> 
         /// Poreski identifikacioni broj (PIB)
         /// </summary>
-        /// <param name="vatnumber"></param>
+        /// <param name="vatId"></param>
         /// <returns></returns>
-        public override ValidationResult ValidateVAT(string vatnumber)
+        public override ValidationResult ValidateVAT(string vatId)
         {
-            vatnumber = vatnumber.RemoveSpecialCharacthers().ToUpper().Replace("RS", string.Empty);
-            if (!Regex.IsMatch(vatnumber, @"^\d{9}$"))
+            vatId = vatId.RemoveSpecialCharacthers().ToUpper().Replace("RS", string.Empty);
+            if (!Regex.IsMatch(vatId, @"^\d{9}$"))
             {
                 return ValidationResult.InvalidFormat("123456789");
             }
@@ -109,12 +106,12 @@ namespace CountryValidation.Countries
             var product = 10;
             for (var i = 0; i < 8; i++)
             {
-                int sum = (int.Parse(vatnumber[i].ToString()) + product) % 10;
+                int sum = (int.Parse(vatId[i].ToString()) + product) % 10;
                 if (sum == 0) { sum = 10; }
                 product = (2 * sum) % 11;
             }
 
-            bool isValid = (product + int.Parse(vatnumber.Substring(8))) % 10 == 1;
+            bool isValid = (product + int.Parse(vatId.Substring(8))) % 10 == 1;
             return isValid ? ValidationResult.Success() : ValidationResult.InvalidChecksum();
 
         }

@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace CountryValidation.Countries
@@ -18,41 +16,41 @@ namespace CountryValidation.Countries
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public override ValidationResult ValidateEntity(string number)
+        public override ValidationResult ValidateEntity(string id)
         {
-            number = number.RemoveSpecialCharacthers();
-            if (!number.All(char.IsDigit))
+            id = id.RemoveSpecialCharacthers();
+            if (!id.All(char.IsDigit))
             {
                 return ValidationResult.InvalidFormat("1234567890");
             }
-            else if (number.Length != 10)
+            else if (id.Length != 10)
             {
                 return ValidationResult.InvalidLength();
             }
-            return number.CheckLuhnDigit() ? ValidationResult.Success() : ValidationResult.InvalidChecksum();
+            return id.CheckLuhnDigit() ? ValidationResult.Success() : ValidationResult.InvalidChecksum();
         }
 
         /// <summary>
         /// Validate PERSONNUMMER
         /// </summary>
-        /// <param name="number"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
-        public override ValidationResult ValidateIndividualTaxCode(string number)
+        public override ValidationResult ValidateIndividualTaxCode(string id)
         {
-            number = number.RemoveSpecialCharacthers();
-            if (!(number.Length == 10 || number.Length == 12))
+            id = id.RemoveSpecialCharacthers();
+            if (!(id.Length == 10 || id.Length == 12))
             {
                 return ValidationResult.InvalidLength();
             }
-            else if (!number.All(char.IsDigit))
+            else if (!id.All(char.IsDigit))
             {
                 return ValidationResult.Invalid("Only numbers are allowed");
             }
             try
             {
-                var year = int.Parse(number.Substring(0, 2)) + 1900;
-                var month = int.Parse(number.Substring(2, 2));
-                var day = int.Parse(number.Substring(4, 2));
+                var year = int.Parse(id.Substring(0, 2)) + 1900;
+                var month = int.Parse(id.Substring(2, 2));
+                var day = int.Parse(id.Substring(4, 2));
                 DateTime date = new DateTime(year, month, day);
             }
             catch
@@ -60,20 +58,20 @@ namespace CountryValidation.Countries
                 return ValidationResult.InvalidDate();
             }
 
-            return number.Substring(0, 10).CheckLuhnDigit() ? ValidationResult.Success() : ValidationResult.InvalidChecksum();
+            return id.Substring(0, 10).CheckLuhnDigit() ? ValidationResult.Success() : ValidationResult.InvalidChecksum();
         }
 
         /// <summary>
         /// VAT-nummer or momsnummer 
         /// </summary>
-        /// <param name="vat"></param>
+        /// <param name="vatId"></param>
         /// <returns></returns>
-        public override ValidationResult ValidateVAT(string vat)
+        public override ValidationResult ValidateVAT(string vatId)
         {
-            vat = vat?.RemoveSpecialCharacthers();
-            vat = vat?.Replace("SE", string.Empty).Replace("se", string.Empty);
+            vatId = vatId?.RemoveSpecialCharacthers();
+            vatId = vatId?.Replace("SE", string.Empty).Replace("se", string.Empty);
 
-            if (!Regex.IsMatch(vat, @"^\d{10}01$"))
+            if (!Regex.IsMatch(vatId, @"^\d{10}01$"))
             {
                 return ValidationResult.InvalidFormat("123456789001");
             }
@@ -83,7 +81,7 @@ namespace CountryValidation.Countries
             var sum = 0;
             foreach (var m in Multipliers)
             {
-                var temp = vat[index++].ToInt() * m;
+                var temp = vatId[index++].ToInt() * m;
                 sum += temp > 9 ? (int)Math.Floor(temp / 10D) + temp % 10 : temp;
             }
 
@@ -94,7 +92,7 @@ namespace CountryValidation.Countries
                 checkDigit = 0;
             }
 
-            bool isValid = checkDigit == vat[9].ToInt();
+            bool isValid = checkDigit == vatId[9].ToInt();
             return isValid ? ValidationResult.Success() : ValidationResult.InvalidChecksum();
         }
 

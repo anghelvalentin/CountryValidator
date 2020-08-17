@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace CountryValidation.Countries
@@ -17,11 +15,11 @@ namespace CountryValidation.Countries
         /// <summary>
         /// VKN (Vergi Kimlik Numarası, Turkish tax identification number).
         /// </summary>
-        /// <param name="vkn"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
-        public override ValidationResult ValidateEntity(string vkn)
+        public override ValidationResult ValidateEntity(string id)
         {
-            return ValidateVAT(vkn);
+            return ValidateVAT(id);
         }
 
         /// <summary>
@@ -48,22 +46,20 @@ namespace CountryValidation.Countries
 
         private string CalculatChecksumKimlik(string number)
         {
-            int check1 = 0;
-            int check2 = 0;
             int sum = 0;
             for (int i = 0; i < number.Length; i++)
             {
                 sum = sum + (i % 2 == 0 ? 3 : 1) * (int)char.GetNumericValue(number[i]);
             }
 
-            check1 = (10 - sum).Mod(10);
+            int check1 = (10 - sum).Mod(10);
 
             sum = 0;
             for (int i = 0; i < number.Length; i++)
             {
                 sum = sum + (int)char.GetNumericValue(number[i]);
             }
-            check2 = (check1 + sum).Mod(10);
+            int check2 = (check1 + sum).Mod(10);
 
             return $"{check1}{check2}";
         }
@@ -98,22 +94,22 @@ namespace CountryValidation.Countries
         /// <summary>
         /// VKN (Vergi Kimlik Numarası, Turkish tax identification number).
         /// </summary>
-        /// <param name="vkn"></param>
+        /// <param name="vatId"></param>
         /// <returns></returns>
-        public override ValidationResult ValidateVAT(string vkn)
+        public override ValidationResult ValidateVAT(string vatId)
         {
-            vkn = vkn.RemoveSpecialCharacthers().ToUpper().Replace("TR", string.Empty);
+            vatId = vatId?.RemoveSpecialCharacthers().ToUpper().Replace("TR", string.Empty);
 
 
-            if (!vkn.All(char.IsDigit))
+            if (!vatId.All(char.IsDigit))
             {
                 return ValidationResult.InvalidFormat("1234567890");
             }
-            else if (vkn.Length != 10)
+            else if (vatId.Length != 10)
             {
                 return ValidationResult.InvalidLength();
             }
-            else if (CalculateChecksum(vkn.Substring(0, vkn.Length - 1)) != (int)char.GetNumericValue(vkn[vkn.Length - 1]))
+            else if (CalculateChecksum(vatId.Substring(0, vatId.Length - 1)) != (int)char.GetNumericValue(vatId[vatId.Length - 1]))
             {
                 return ValidationResult.InvalidChecksum();
             }

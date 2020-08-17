@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace CountryValidation.Countries
@@ -14,7 +12,8 @@ namespace CountryValidation.Countries
         }
         public override ValidationResult ValidateEntity(string id)
         {
-            throw new NotImplementedException();
+            throw new NotSupportedException();
+
         }
 
         /// <summary>
@@ -99,7 +98,7 @@ namespace CountryValidation.Countries
 
         public override ValidationResult ValidateVAT(string vatId)
         {
-            throw new NotImplementedException();
+            throw new NotSupportedException();
         }
 
         public override ValidationResult ValidatePostalCode(string postalCode)

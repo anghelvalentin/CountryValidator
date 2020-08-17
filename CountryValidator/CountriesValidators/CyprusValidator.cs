@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 
 namespace CountryValidation.Countries
 {
@@ -23,12 +19,12 @@ namespace CountryValidation.Countries
             return ValidationResult.Success();
         }
 
-        public override ValidationResult ValidateEntity(string vat)
+        public override ValidationResult ValidateEntity(string id)
         {
-            vat = vat.RemoveSpecialCharacthers();
-            vat = vat?.Replace("cy", string.Empty)?.Replace("CY", string.Empty);
+            id = id.RemoveSpecialCharacthers();
+            id = id?.Replace("cy", string.Empty)?.Replace("CY", string.Empty);
 
-            if (!Regex.IsMatch(vat, @"^([0-59]\d{7}[A-Z])$"))
+            if (!Regex.IsMatch(id, @"^([0-59]\d{7}[A-Z])$"))
             {
                 return ValidationResult.InvalidFormat("12345678X");
             }
@@ -36,7 +32,7 @@ namespace CountryValidation.Countries
             var result = 0;
             for (var index = 0; index < 8; index++)
             {
-                var temp = vat[index].ToInt();
+                var temp = id[index].ToInt();
 
                 if (index % 2 == 0)
                 {
@@ -66,26 +62,26 @@ namespace CountryValidation.Countries
             }
 
             var checkDigit = result % 26;
-            bool isValid = vat[8] == (char)(checkDigit + 65);
+            bool isValid = id[8] == (char)(checkDigit + 65);
             return isValid ? ValidationResult.Success() : ValidationResult.InvalidChecksum();
         }
 
-        public override ValidationResult ValidateIndividualTaxCode(string vat)
+        public override ValidationResult ValidateIndividualTaxCode(string vatId)
         {
-            return ValidateEntity(vat);
+            return ValidateEntity(vatId);
         }
 
-        public override ValidationResult ValidateVAT(string vat)
+        public override ValidationResult ValidateVAT(string vatId)
         {
-            vat = vat.RemoveSpecialCharacthers();
-            vat = vat.Replace("CY", string.Empty).Replace("cy", string.Empty);
+            vatId = vatId.RemoveSpecialCharacthers();
+            vatId = vatId.Replace("CY", string.Empty).Replace("cy", string.Empty);
 
-            if (!Regex.IsMatch(vat, @"^([0-59]\d{7}[A-Z])$"))
+            if (!Regex.IsMatch(vatId, @"^([0-59]\d{7}[A-Z])$"))
             {
                 return ValidationResult.InvalidFormat("12345678X");
             }
 
-            return ValidateEntity(vat);
+            return ValidateEntity(vatId);
         }
 
         public override ValidationResult ValidatePostalCode(string postalCode)

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 
 namespace CountryValidation.Countries
 {
@@ -92,26 +88,26 @@ namespace CountryValidation.Countries
         }
 
 
-        public override ValidationResult ValidateVAT(string vat)
+        public override ValidationResult ValidateVAT(string vatId)
         {
             int[] multipliers = { 8, 7, 6, 5, 4, 3, 2 };
-            if (!Regex.IsMatch(vat, @"^(\d{7}[A-W])|([7-9][A-Z\*\+)]\d{5}[A-W])|(\d{7}[A-W][AH])$"))
+            if (!Regex.IsMatch(vatId, @"^(\d{7}[A-W])|([7-9][A-Z\*\+)]\d{5}[A-W])|(\d{7}[A-W][AH])$"))
             {
                 return ValidationResult.InvalidFormat("Invalid format");
             }
 
-            if (Regex.IsMatch(vat, @"^\d[A-Z\*\+]"))
+            if (Regex.IsMatch(vatId, @"^\d[A-Z\*\+]"))
             {
-                vat = "0" + vat.Substring(2, 5)
-                          + vat.Substring(0, 1)
-                          + vat.Substring(7, 1);
+                vatId = "0" + vatId.Substring(2, 5)
+                          + vatId.Substring(0, 1)
+                          + vatId.Substring(7, 1);
             }
 
-            var sum = vat.Sum(multipliers);
+            var sum = vatId.Sum(multipliers);
 
-            if (Regex.IsMatch(vat, @"^\d{7}[A-Z][AH]$"))
+            if (Regex.IsMatch(vatId, @"^\d{7}[A-Z][AH]$"))
             {
-                if (vat[8] == 'H')
+                if (vatId[8] == 'H')
                 {
                     sum += 72;
                 }
@@ -123,7 +119,7 @@ namespace CountryValidation.Countries
 
             var checkDigit = sum % 23;
 
-            bool isValid = vat[7] == (checkDigit == 0 ? 'W' : (char)(checkDigit + 64));
+            bool isValid = vatId[7] == (checkDigit == 0 ? 'W' : (char)(checkDigit + 64));
             return isValid ? ValidationResult.Success() : ValidationResult.InvalidChecksum();
 
         }

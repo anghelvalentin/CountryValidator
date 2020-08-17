@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace CountryValidation.Countries
@@ -135,18 +133,18 @@ namespace CountryValidation.Countries
         /// <summary>
         /// Identifikačné číslo pre daň z pridanej hodnoty (IČ DPH)
         /// </summary>
-        /// <param name="vat"></param>
+        /// <param name="vatId"></param>
         /// <returns></returns>
-        public override ValidationResult ValidateVAT(string vat)
+        public override ValidationResult ValidateVAT(string vatId)
         {
-            vat = vat.RemoveSpecialCharacthers();
-            vat = vat.Replace("SK", string.Empty).Replace("sk", string.Empty);
-            if (!Regex.IsMatch(vat, @"^[1-9]\d[2346-9]\d{7}$"))
+            vatId = vatId.RemoveSpecialCharacthers();
+            vatId = vatId.Replace("SK", string.Empty).Replace("sk", string.Empty);
+            if (!Regex.IsMatch(vatId, @"^[1-9]\d[2346-9]\d{7}$"))
             {
                 return ValidationResult.InvalidFormat("1234567890");
             }
 
-            var nr = ulong.Parse(vat);
+            var nr = ulong.Parse(vatId);
             bool isValid = nr % 11 == 0;
 
             return isValid ? ValidationResult.Success() : ValidationResult.InvalidChecksum();

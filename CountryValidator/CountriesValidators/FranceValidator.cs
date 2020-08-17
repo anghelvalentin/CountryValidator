@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace CountryValidation.Countries
 {
     public class FranceValidator : IdValidationAbstract
     {
-        string _alphabet = "0123456789ABCDEFGHJKLMNPQRSTUVWXYZ";
+        readonly string _alphabet = "0123456789ABCDEFGHJKLMNPQRSTUVWXYZ";
 
         public FranceValidator()
         {
@@ -137,7 +134,7 @@ namespace CountryValidation.Countries
         public override ValidationResult ValidateVAT(string number)
         {
             number = number.RemoveSpecialCharacthers().ToUpper().Replace("FR", string.Empty);
-            if (!(_alphabet.IndexOf(number[0]) != -1 || _alphabet.IndexOf(number[0]) != -1))
+            if (_alphabet.IndexOf(number[0]) == -1)
             {
                 return ValidationResult.Invalid("Invalid format");
             }
@@ -166,9 +163,9 @@ namespace CountryValidation.Countries
                 int check = 0;
                 if (char.IsDigit(number[0]))
                 {
-                    check = (
-                        _alphabet.IndexOf(number[0]) * 24 +
-                        _alphabet.IndexOf(number[1]) - 10);
+                    check =
+                        (_alphabet.IndexOf(number[0]) * 24) +
+                        _alphabet.IndexOf(number[1]) - 10;
                 }
                 else
                 {

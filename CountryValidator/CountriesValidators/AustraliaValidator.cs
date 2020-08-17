@@ -1,8 +1,4 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using System.Text.RegularExpressions;
 
 
@@ -18,20 +14,20 @@ namespace CountryValidation.Countries
         /// <summary>
         /// Validate ABN, ACN or TFN
         /// </summary>
-        /// <param name="number"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
-        public override ValidationResult ValidateEntity(string number)
+        public override ValidationResult ValidateEntity(string id)
         {
 
-            if (ValidateABN(number).IsValid)
+            if (ValidateABN(id).IsValid)
             {
                 return ValidationResult.Success();
             }
-            else if (ValidateACN(number).IsValid)
+            else if (ValidateACN(id).IsValid)
             {
                 return ValidationResult.Success();
             }
-            else if (ValidateTFN(number).IsValid)
+            else if (ValidateTFN(id).IsValid)
             {
                 return ValidationResult.Success();
 
@@ -42,11 +38,11 @@ namespace CountryValidation.Countries
         /// <summary>
         /// Validate TFN
         /// </summary>
-        /// <param name="tfn"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
-        public override ValidationResult ValidateIndividualTaxCode(string tfn)
+        public override ValidationResult ValidateIndividualTaxCode(string id)
         {
-            return ValidateTFN(tfn);
+            return ValidateTFN(id);
         }
 
         /// <summary>

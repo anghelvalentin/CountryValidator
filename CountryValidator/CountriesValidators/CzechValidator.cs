@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace CountryValidation.Countries
@@ -128,30 +126,30 @@ namespace CountryValidation.Countries
         /// <summary>
         /// Danove Identifikacni Cislo (DIC/VAT)
         /// </summary>
-        /// <param name="vat"></param>
+        /// <param name="vatId"></param>
         /// <returns></returns>
-        public override ValidationResult ValidateVAT(string vat)
+        public override ValidationResult ValidateVAT(string vatId)
         {
-            vat = vat.RemoveSpecialCharacthers();
-            vat = vat.Replace("cz", string.Empty).Replace("CZ", string.Empty);
+            vatId = vatId.RemoveSpecialCharacthers();
+            vatId = vatId.Replace("cz", string.Empty).Replace("CZ", string.Empty);
 
             int total = 0;
             var multipliers = new int[] { 8, 7, 6, 5, 4, 3, 2 };
 
 
-            if (Regex.IsMatch(vat, @"^\d{8}$"))
+            if (Regex.IsMatch(vatId, @"^\d{8}$"))
             {
 
                 for (int i = 0; i < 7; i++)
                 {
-                    total += int.Parse(vat[i].ToString()) * multipliers[i];
+                    total += int.Parse(vatId[i].ToString()) * multipliers[i];
                 }
 
                 total = 11 - total % 11;
                 if (total == 10) total = 0;
                 if (total == 11) total = 1;
 
-                if (total == int.Parse(vat[7].ToString()))
+                if (total == int.Parse(vatId[7].ToString()))
                 {
                     return ValidationResult.Success();
                 }
@@ -160,9 +158,9 @@ namespace CountryValidation.Countries
                     return ValidationResult.InvalidChecksum();
                 }
             }
-            else if (Regex.IsMatch(vat, @"^[0-5][0-9][0|1|5|6][0-9][0-3][0-9]\d{3}$"))
+            else if (Regex.IsMatch(vatId, @"^[0-5][0-9][0|1|5|6][0-9][0-3][0-9]\d{3}$"))
             {
-                var temp = int.Parse(vat.Substring(0, 2));
+                var temp = int.Parse(vatId.Substring(0, 2));
                 if (temp > 62)
                 {
                     return ValidationResult.InvalidChecksum();
@@ -170,12 +168,12 @@ namespace CountryValidation.Countries
 
                 return ValidationResult.Success();
             }
-            else if (Regex.IsMatch(vat, @"^6\d{8}$"))
+            else if (Regex.IsMatch(vatId, @"^6\d{8}$"))
             {
 
                 for (int i = 0; i < 7; i++)
                 {
-                    total += int.Parse(vat[i + 1].ToString()) * multipliers[i];
+                    total += int.Parse(vatId[i + 1].ToString()) * multipliers[i];
                 }
                 int a;
                 if (total % 11 == 0)
@@ -190,7 +188,7 @@ namespace CountryValidation.Countries
                 var pointer = a - total;
 
                 var lookup = new int[] { 8, 7, 6, 5, 4, 3, 2, 1, 0, 9, 8 };
-                if (lookup[pointer - 1] == int.Parse(vat.Substring(8, 1).ToString()))
+                if (lookup[pointer - 1] == int.Parse(vatId.Substring(8, 1).ToString()))
                 {
                     return ValidationResult.Success();
                 }
@@ -199,12 +197,12 @@ namespace CountryValidation.Countries
                     return ValidationResult.InvalidChecksum();
                 }
             }
-            else if (Regex.IsMatch(vat, @"^\d{2}[0-3|5-8][0-9][0-3][0-9]\d{4}$"))
+            else if (Regex.IsMatch(vatId, @"^\d{2}[0-3|5-8][0-9][0-3][0-9]\d{4}$"))
             {
-                var temp = int.Parse(vat.Substring(0, 2)) + int.Parse(vat.Substring(2, 2))
-                    + int.Parse(vat.Substring(4, 2)) + int.Parse(vat.Substring(6, 2))
-                    + int.Parse(vat.Substring(8));
-                if (temp % 11 == 0 && long.Parse(vat) % 11 == 0)
+                var temp = int.Parse(vatId.Substring(0, 2)) + int.Parse(vatId.Substring(2, 2))
+                    + int.Parse(vatId.Substring(4, 2)) + int.Parse(vatId.Substring(6, 2))
+                    + int.Parse(vatId.Substring(8));
+                if (temp % 11 == 0 && long.Parse(vatId) % 11 == 0)
                 {
                     return ValidationResult.Success();
                 }

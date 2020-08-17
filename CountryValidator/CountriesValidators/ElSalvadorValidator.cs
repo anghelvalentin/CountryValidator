@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace CountryValidation.Countries
@@ -15,7 +13,7 @@ namespace CountryValidation.Countries
 
         public override ValidationResult ValidateEntity(string id)
         {
-            return ValidationResult.InvalidChecksum();
+            return ValidateVAT(id);
         }
 
 
@@ -49,24 +47,24 @@ namespace CountryValidation.Countries
         /// <summary>
         /// NIT (Número de Identificación Tributaria, El Salvador tax number)
         /// </summary>
-        /// <param name="number"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
-        public override ValidationResult ValidateIndividualTaxCode(string number)
+        public override ValidationResult ValidateIndividualTaxCode(string id)
         {
-            number = number.RemoveSpecialCharacthers();
-            if (number.Length != 14)
+            id = id.RemoveSpecialCharacthers();
+            if (id.Length != 14)
             {
                 return ValidationResult.InvalidLength();
             }
-            else if (!number.All(char.IsDigit))
+            else if (!id.All(char.IsDigit))
             {
                 return ValidationResult.InvalidFormat("12345678901234");
             }
-            else if (!new char[] { '0', '1', '9' }.Contains(number[0]))
+            else if (!new char[] { '0', '1', '9' }.Contains(id[0]))
             {
                 return ValidationResult.Invalid("Invalid code. First digit must be 0, 1 or 9");
             }
-            if ((int)char.GetNumericValue(number[number.Length - 1]) != CalculateChecksum(number))
+            if ((int)char.GetNumericValue(id[id.Length - 1]) != CalculateChecksum(id))
             {
                 return ValidationResult.InvalidChecksum();
             }

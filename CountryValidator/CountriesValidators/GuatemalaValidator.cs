@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using CountryValidation.Countries;
 
 namespace CountryValidation.Countries
 {
@@ -44,24 +41,24 @@ namespace CountryValidation.Countries
         /// <summary>
         /// NIT (Número de Identificación Tributaria, Guatemala tax number)
         /// </summary>
-        /// <param name="nit"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
-        public override ValidationResult ValidateEntity(string nit)
+        public override ValidationResult ValidateEntity(string id)
         {
-            nit = nit.RemoveSpecialCharacthers();
-            if (nit.Length < 2 || nit.Length > 12)
+            id = id.RemoveSpecialCharacthers();
+            if (id.Length < 2 || id.Length > 12)
             {
                 return ValidationResult.InvalidLength();
             }
-            else if (!nit.Substring(0, nit.Length - 1).All(char.IsDigit))
+            else if (!id.Substring(0, id.Length - 1).All(char.IsDigit))
             {
                 return ValidationResult.Invalid("Invalid format");
             }
-            else if (nit[nit.Length - 1] != 'K' && !char.IsDigit(nit[nit.Length - 1]))
+            else if (id[id.Length - 1] != 'K' && !char.IsDigit(id[id.Length - 1]))
             {
                 return ValidationResult.Invalid("Invalid format");
             }
-            else if (nit[nit.Length - 1].ToString() != CalculateChecksum(nit.Substring(0, nit.Length - 1)))
+            else if (id[id.Length - 1].ToString() != CalculateChecksum(id.Substring(0, id.Length - 1)))
             {
                 return ValidationResult.InvalidChecksum();
             }
@@ -71,7 +68,7 @@ namespace CountryValidation.Countries
 
         public override ValidationResult ValidateIndividualTaxCode(string ssn)
         {
-            throw new NotImplementedException();
+            throw new NotSupportedException();
         }
 
         /// <summary>

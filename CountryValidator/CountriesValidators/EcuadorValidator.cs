@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace CountryValidation.Countries
@@ -14,7 +12,7 @@ namespace CountryValidation.Countries
         }
 
 
-        public int Checksum(string number, int[] weights)
+        private int Checksum(string number, int[] weights)
         {
             int sum = 0;
             for (int i = 0; i < number.Length; i++)
@@ -70,10 +68,6 @@ namespace CountryValidation.Countries
                 if (ruc.Substring(ruc.Length - 3) == "000")
                 {
                     return ValidationResult.Invalid("Establishment Number Wrong");
-                }
-                else if (true)
-                {
-
                 }
                 if (Checksum(ruc.Substring(0, 10), new int[] { 4, 3, 2, 7, 6, 5, 4, 3, 2, 1 }) != 0)
                 {

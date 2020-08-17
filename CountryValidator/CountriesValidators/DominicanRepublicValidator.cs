@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace CountryValidation.Countries
 {
     public class DominicanRepublicValidator : IdValidationAbstract
     {
-        private string[] validRnc = new string[]
+        private readonly string[] _validRnc = new string[]
         {
             "101581601", "101582245", "101595422", "101595785", "10233317", "131188691", "401007374",
             "501341601", "501378067", "501620371" ,"501651319" ,"501651823", "501651845", "501651926",
@@ -16,7 +14,7 @@ namespace CountryValidation.Countries
             "504681442", "505038691"
         };
 
-        private string[] validCedula = new string[]
+        private readonly string[] _validCedula = new string[]
         {
             "00000021249","00000031417","00000035692","00000045342","00000058035","00000065377","00000078587","00000111941","00000126295","00000129963","00000140874","00000144491",
             "00000155482","00000195576","00000236621","00000292212","00000302347","00000404655","00000547495","00000564933","00000669773","00000719400","00001965804","00004110056",
@@ -69,7 +67,7 @@ namespace CountryValidation.Countries
             "58005174058","90001200901"
         };
 
-        string[] _ecf_document_types = {
+        readonly string[] _ecf_document_types = {
             "31",  // invoices for fiscal declaration (or tax reporting)
             "32",  // invoices for final consumer
             "33",  // debit note
@@ -81,7 +79,7 @@ namespace CountryValidation.Countries
         };
 
 
-        string[] _ncf_document_types = new string[]{
+        readonly string[] _ncf_document_types = new string[]{
     "01",  // invoices for fiscal declaration (or tax reporting)
     "02",  // invoices for final consumer
     "03",  // debit note
@@ -104,31 +102,31 @@ namespace CountryValidation.Countries
 
         public override ValidationResult ValidateEntity(string id)
         {
-            throw new NotImplementedException();
+            return ValidateVAT(id);
         }
 
 
         /// <summary>
         /// Cedula (Dominican Republic national identification number).
         /// </summary>
-        /// <param name="cedula"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
-        public override ValidationResult ValidateIndividualTaxCode(string cedula)
+        public override ValidationResult ValidateIndividualTaxCode(string id)
         {
-            cedula = cedula.RemoveSpecialCharacthers();
-            if (!cedula.All(char.IsDigit))
+            id = id.RemoveSpecialCharacthers();
+            if (!id.All(char.IsDigit))
             {
                 return ValidationResult.InvalidFormat("12345678901");
             }
-            else if (validCedula.Contains(cedula))
+            else if (_validCedula.Contains(id))
             {
                 return ValidationResult.Success();
             }
-            else if (cedula.Length != 11)
+            else if (id.Length != 11)
             {
                 return ValidationResult.InvalidLength();
             }
-            else if (!cedula.CheckLuhnDigit())
+            else if (!id.CheckLuhnDigit())
             {
                 return ValidationResult.InvalidChecksum();
             }
@@ -148,7 +146,7 @@ namespace CountryValidation.Countries
             {
                 return ValidationResult.InvalidFormat("123456789");
             }
-            else if (validRnc.Contains(rnc))
+            else if (_validRnc.Contains(rnc))
             {
                 return ValidationResult.Success();
             }

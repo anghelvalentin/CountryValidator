@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace CountryValidation.Countries
@@ -59,14 +56,14 @@ namespace CountryValidation.Countries
         /// <summary>
         /// Virdisaukaskattsnumer (VSK)  
         /// </summary>
-        /// <param name="vat"></param>
+        /// <param name="vatId"></param>
         /// <returns></returns>
-        public override ValidationResult ValidateVAT(string vat)
+        public override ValidationResult ValidateVAT(string vatId)
         {
-            vat = vat.RemoveSpecialCharacthers();
-            vat = vat.Replace("is", string.Empty).Replace("IS", string.Empty);
+            vatId = vatId.RemoveSpecialCharacthers();
+            vatId = vatId.Replace("is", string.Empty).Replace("IS", string.Empty);
 
-            if (Regex.IsMatch(vat, @"^[0-9]{5,6}$"))
+            if (Regex.IsMatch(vatId, @"^[0-9]{5,6}$"))
             {
                 return ValidationResult.Success();
             }

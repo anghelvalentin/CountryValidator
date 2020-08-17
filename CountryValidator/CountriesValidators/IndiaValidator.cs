@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace CountryValidation.Countries
@@ -14,7 +12,7 @@ namespace CountryValidation.Countries
             CountryCode = nameof(Country.IN);
         }
 
-        int[,] d = new int[,]
+        readonly int[,] d = new int[,]
         {
             {0, 1, 2, 3, 4, 5, 6, 7, 8, 9},
             {1, 2, 3, 4, 0, 6, 7, 8, 9, 5},
@@ -28,7 +26,7 @@ namespace CountryValidation.Countries
             {9, 8, 7, 6, 5, 4, 3, 2, 1, 0}
         };
 
-        int[,] p = new int[,]
+        readonly int[,] p = new int[,]
        {
             {0, 1, 2, 3, 4, 5, 6, 7, 8, 9},
             {1, 5, 7, 6, 2, 8, 3, 0, 9, 4},
@@ -62,19 +60,6 @@ namespace CountryValidation.Countries
             return isValid ? ValidationResult.Success() : ValidationResult.InvalidChecksum();
         }
 
-        private string GenerateVerhoeff(string num)
-        {
-            int c = 0;
-            int[] myArray = StringToReversedIntArray(num);
-
-            for (int i = 0; i < myArray.Length; i++)
-            {
-                c = d[c, p[((i + 1) % 8), myArray[i]]];
-            }
-
-            return inv[c].ToString();
-        }
-
         private int[] StringToReversedIntArray(string num)
         {
             int[] myArray = new int[num.Length];
@@ -93,20 +78,20 @@ namespace CountryValidation.Countries
         /// <summary>
         /// PAN (Permanent Account Number, Indian income tax identifier)
         /// </summary>
-        /// <param name="number"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
-        public override ValidationResult ValidateEntity(string number)
+        public override ValidationResult ValidateEntity(string id)
         {
-            number = number.RemoveSpecialCharacthers();
-            if (number.Length != 10)
+            id = id.RemoveSpecialCharacthers();
+            if (id.Length != 10)
             {
                 return ValidationResult.InvalidLength();
             }
-            else if (!Regex.IsMatch(number, "^[A-Z]{5}[0-9]{4}[A-Z]$"))
+            else if (!Regex.IsMatch(id, "^[A-Z]{5}[0-9]{4}[A-Z]$"))
             {
                 return ValidationResult.InvalidFormat("AAAAA1234A");
             }
-            else if (!HasValidCardType(number))
+            else if (!HasValidCardType(id))
             {
                 return ValidationResult.Invalid("Invalid card type");
             }

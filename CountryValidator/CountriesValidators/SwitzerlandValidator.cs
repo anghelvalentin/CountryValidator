@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using CountryValidation.Countries;
 
 namespace CountryValidation.Countries
 {
@@ -43,37 +40,37 @@ namespace CountryValidation.Countries
         /// <summary>
         /// Validate AHV (Sozialversicherungsnummer)
         /// </summary>
-        /// <param name="ahv"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
-        public override ValidationResult ValidateIndividualTaxCode(string ahv)
+        public override ValidationResult ValidateIndividualTaxCode(string id)
         {
-            ahv = ahv.RemoveSpecialCharacthers();
+            id = id.RemoveSpecialCharacthers();
 
-            var checkDigit = GetCheckDigit(ahv);
-            return (int)char.GetNumericValue(ahv[12]) == checkDigit ? ValidationResult.Success() : ValidationResult.InvalidChecksum();
+            var checkDigit = GetCheckDigit(id);
+            return (int)char.GetNumericValue(id[12]) == checkDigit ? ValidationResult.Success() : ValidationResult.InvalidChecksum();
         }
 
         /// <summary>
         /// UID (Unternehmens-Identifikationsnummer, Swiss business identifier)
         /// </summary>
-        /// <param name="number"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
-        public override ValidationResult ValidateEntity(string number)
+        public override ValidationResult ValidateEntity(string id)
         {
-            number = number.RemoveSpecialCharacthers().ToUpper();
-            if (number.Length != 12)
+            id = id.RemoveSpecialCharacthers().ToUpper();
+            if (id.Length != 12)
             {
                 return ValidationResult.InvalidLength();
             }
-            else if (!number.StartsWith("CHE"))
+            else if (!id.StartsWith("CHE"))
             {
                 return ValidationResult.Invalid("Invalid company. First 3 letters must be 'CHE'");
             }
-            else if (!number.Substring(3).All(char.IsDigit))
+            else if (!id.Substring(3).All(char.IsDigit))
             {
                 return ValidationResult.InvalidFormat("CHE123456789");
             }
-            else if ((int)char.GetNumericValue(number[number.Length - 1]) != CalculateEntityCheckSum(number.Substring(3, 8)))
+            else if ((int)char.GetNumericValue(id[id.Length - 1]) != CalculateEntityCheckSum(id.Substring(3, 8)))
             {
                 return ValidationResult.InvalidChecksum();
             }

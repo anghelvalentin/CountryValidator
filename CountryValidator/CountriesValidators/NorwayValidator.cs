@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace CountryValidation.Countries
@@ -118,15 +116,15 @@ namespace CountryValidation.Countries
         /// <summary>
         /// Organisasjonsnummer (Organization number) Orgnr
         /// </summary>
-        /// <param name="vatnumber"></param>
+        /// <param name="vatId"></param>
         /// <returns></returns>
-        public override ValidationResult ValidateVAT(string vatnumber)
+        public override ValidationResult ValidateVAT(string vatId)
         {
-            vatnumber = vatnumber?.RemoveSpecialCharacthers();
-            vatnumber = vatnumber?.Replace("NO", string.Empty).Replace("no", string.Empty)
+            vatId = vatId?.RemoveSpecialCharacthers();
+            vatId = vatId?.Replace("NO", string.Empty).Replace("no", string.Empty)
                 .Replace("MVA", string.Empty).Replace("mva", string.Empty);
 
-            if (!Regex.IsMatch(vatnumber, @"^\d{9}$"))
+            if (!Regex.IsMatch(vatId, @"^\d{9}$"))
             {
                 return ValidationResult.InvalidFormat("123456789");
             }
@@ -136,7 +134,7 @@ namespace CountryValidation.Countries
 
             for (var i = 0; i < 8; i++)
             {
-                total += int.Parse(vatnumber[i].ToString()) * multipliers[i];
+                total += int.Parse(vatId[i].ToString()) * multipliers[i];
             }
 
             total = 11 - total % 11;
@@ -147,7 +145,7 @@ namespace CountryValidation.Countries
             if (total < 10)
             {
 
-                bool isValid = total == int.Parse(vatnumber.Substring(8));
+                bool isValid = total == int.Parse(vatId.Substring(8));
                 return isValid ? ValidationResult.Success() : ValidationResult.InvalidChecksum();
             }
             return ValidationResult.InvalidChecksum();

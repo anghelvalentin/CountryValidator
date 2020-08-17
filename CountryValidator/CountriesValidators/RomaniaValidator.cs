@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace CountryValidation.Countries
@@ -90,27 +87,27 @@ namespace CountryValidation.Countries
             return isValid ? ValidationResult.Success() : ValidationResult.InvalidChecksum();
         }
 
-        public override ValidationResult ValidateVAT(string vat)
+        public override ValidationResult ValidateVAT(string vatId)
         {
-            vat = vat.RemoveSpecialCharacthers();
-            vat = vat.Replace("RO", string.Empty).Replace("ro", string.Empty);
+            vatId = vatId.RemoveSpecialCharacthers();
+            vatId = vatId.Replace("RO", string.Empty).Replace("ro", string.Empty);
 
-            if (!Regex.IsMatch(vat, @"^[0-9]{2,10}$"))
+            if (!Regex.IsMatch(vatId, @"^[0-9]{2,10}$"))
             {
                 return ValidationResult.Invalid("Invalid format");
             }
 
             int[] multipliers = { 7, 5, 3, 2, 1, 7, 5, 3, 2 };
 
-            var end = vat.Length - 1;
+            var end = vatId.Length - 1;
 
-            var controlDigit = vat[end].ToInt();
+            var controlDigit = vatId[end].ToInt();
 
-            var slice = vat.Slice(0, end);
+            var slice = vatId.Slice(0, end);
 
-            vat = slice.PadLeft(9, '0');
+            vatId = slice.PadLeft(9, '0');
 
-            var sum = vat.Sum(multipliers);
+            var sum = vatId.Sum(multipliers);
 
             var checkDigit = sum * 10 % 11;
 

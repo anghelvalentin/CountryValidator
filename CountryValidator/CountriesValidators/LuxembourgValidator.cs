@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace CountryValidation.Countries
@@ -19,7 +17,7 @@ namespace CountryValidation.Countries
             return ValidateVAT(id);
         }
 
-        int[,] D = {
+        readonly int[,] _d = {
              { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 },
              { 1, 2, 3, 4, 0, 6, 7, 8, 9, 5},
              {2, 3, 4, 0, 1, 7, 8, 9, 5, 6},
@@ -32,7 +30,7 @@ namespace CountryValidation.Countries
              {9, 8, 7, 6, 5, 4, 3, 2, 1, 0}
         };
 
-        int[,] P = {
+        readonly int[,] _p = {
         {0, 1, 2, 3, 4, 5, 6, 7, 8, 9},
         {1, 5, 7, 6, 2, 8, 3, 0, 9, 4},
         {5, 8, 0, 3, 7, 9, 6, 1, 4, 2},
@@ -144,8 +142,8 @@ namespace CountryValidation.Countries
             for (var j = 0; j < listNumbers.Count; j++)
             {
                 var item = listNumbers[j];
-                var p = P[j % 8, item];
-                check = D[check, p];
+                var p = _p[j % 8, item];
+                check = _d[check, p];
             }
             return check == 0 ? ValidationResult.Success() : ValidationResult.InvalidChecksum();
         }

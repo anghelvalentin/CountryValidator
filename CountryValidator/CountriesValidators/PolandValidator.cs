@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace CountryValidation.Countries
@@ -97,21 +96,21 @@ namespace CountryValidation.Countries
         /// <summary>
         /// Numer Identyfikacji Podatkowej (NIP)  
         /// </summary>
-        /// <param name="vat"></param>
+        /// <param name="vatId"></param>
         /// <returns></returns>
-        public override ValidationResult ValidateVAT(string vat)
+        public override ValidationResult ValidateVAT(string vatId)
         {
-            vat = vat.RemoveSpecialCharacthers();
-            vat = vat.Replace("PL", string.Empty).Replace("pl", string.Empty);
+            vatId = vatId.RemoveSpecialCharacthers();
+            vatId = vatId.Replace("PL", string.Empty).Replace("pl", string.Empty);
 
-            if (!Regex.IsMatch(vat, @"^\d{10}$"))
+            if (!Regex.IsMatch(vatId, @"^\d{10}$"))
             {
                 return ValidationResult.InvalidFormat("1234567890");
             }
 
             int[] multipliers = { 6, 5, 7, 2, 3, 4, 5, 6, 7 };
 
-            var sum = vat.Sum(multipliers);
+            var sum = vatId.Sum(multipliers);
 
             var checkDigit = sum % 11;
 
@@ -120,7 +119,7 @@ namespace CountryValidation.Countries
                 checkDigit = 0;
             }
 
-            bool isValid = checkDigit == vat[9].ToInt();
+            bool isValid = checkDigit == vatId[9].ToInt();
             return isValid ? ValidationResult.Success() : ValidationResult.InvalidChecksum();
 
         }
