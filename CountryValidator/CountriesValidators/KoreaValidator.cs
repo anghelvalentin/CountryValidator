@@ -59,8 +59,7 @@ namespace CountryValidation.Countries
 
             dateString = yearPrefix + ssn.Substring(0, 6);
             maxDate = new DateTime(DateTime.Now.Year - 17, DateTime.Now.Month, DateTime.Now.Day);
-            DateTime datetime;
-            if (DateTime.TryParseExact(dateString, "yyyyMMdd", CultureInfo.InvariantCulture, DateTimeStyles.None, out datetime))
+            if (DateTime.TryParseExact(dateString, "yyyyMMdd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime datetime))
             {
                 if (datetime > maxDate)
                 {

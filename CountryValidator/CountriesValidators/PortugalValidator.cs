@@ -183,7 +183,7 @@ namespace CountryValidation.Countries
 
             for (var i = value.Length - 1; i >= 0; i--)
             {
-                int d = -1;
+                int d;
                 try
                 {
                     d = chars[value[i]];

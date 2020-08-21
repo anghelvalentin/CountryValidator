@@ -18,7 +18,7 @@ namespace CountryValidation.Countries
         /// <returns></returns>
         public override ValidationResult ValidateEntity(string id)
         {
-            return ValidateVAT(id);
+            return ValidateIndividualTaxCode(id);
         }
 
         /// <summary>
@@ -29,8 +29,7 @@ namespace CountryValidation.Countries
         /// https://www.oecd.org/tax/automatic-exchange/crs-implementation-and-assistance/tax-identification-numbers/Andorra-TIN.pdf
         public override ValidationResult ValidateIndividualTaxCode(string id)
         {
-            id = id.RemoveSpecialCharacthers();
-            id = id.Replace("AD", string.Empty).Replace("ad", string.Empty);
+            id = id.RemoveSpecialCharacthers().Replace("AD", string.Empty).Replace("ad", string.Empty);
 
             if (id.Length != 8)
             {
@@ -68,7 +67,7 @@ namespace CountryValidation.Countries
         /// <returns></returns>
         public override ValidationResult ValidateVAT(string vatId)
         {
-            return ValidateEntity(vatId);
+            return ValidateIndividualTaxCode(vatId);
         }
 
         public override ValidationResult ValidatePostalCode(string postalCode)
