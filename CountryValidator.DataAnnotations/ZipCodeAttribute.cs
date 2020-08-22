@@ -8,7 +8,7 @@ namespace CountryValidation.DataAnnotations
     /// When applied to a <see cref="string" /> property or parameter, validates that a valid Zip Code is provided.
     /// </summary>
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Parameter)]
-    public class ZipCodeAttribute : ValidationAttribute
+    public sealed class ZipCodeAttribute : ValidationAttribute
     {
         public ZipCodeAttribute(Country countryCode)
         {

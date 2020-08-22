@@ -70,15 +70,12 @@ namespace CountryValidation.Countries
             char[] charArray = number.ToCharArray();
             Array.Reverse(charArray);
             number = new string(charArray);
-
-            int c1 = 0;
-            int c2 = 0;
             for (int i = 1; i <= number.Length; i++)
             {
-                c1 = ((int)char.GetNumericValue(number[i - 1]) + i) % 10;
+                int c1 = ((int)char.GetNumericValue(number[i - 1]) + i) % 10;
                 if (c1 != 0)
                 {
-                    c2 = (c1 * (int)Math.Pow(2, i)) % 9;
+                    int c2 = (c1 * (int)Math.Pow(2, i)) % 9;
                     if (c2 == 0)
                     {
                         c2 = 9;

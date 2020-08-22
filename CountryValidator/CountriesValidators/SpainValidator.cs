@@ -124,8 +124,7 @@ namespace CountryValidation.Countries
             var control_digit = last_digit != 0 ? (10 - last_digit) : last_digit;
             var control_letter = "JABCDEFGHI".Substring(control_digit, 1);
 
-            bool isValid = false;
-
+            bool isValid;
             if (Regex.IsMatch(letter, "[ABEH]"))
             {
                 isValid = control == control_digit.ToString();

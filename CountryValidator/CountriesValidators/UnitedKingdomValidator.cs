@@ -110,8 +110,11 @@ namespace CountryValidation.Countries
                 total += int.Parse(vatId[i].ToString()) * multipliers[i];
             }
 
-            var cd = total;
-            while (cd > 0) { cd = cd - 97; }
+            int cd = total;
+            while (cd > 0)
+            {
+                cd -= 97;
+            }
 
             cd = Math.Abs(cd);
             if (cd == int.Parse(vatId.Substring(7, 2)) && no < 9990001 && (no < 100000 || no > 999999) && (no < 9490001 || no > 9700000))

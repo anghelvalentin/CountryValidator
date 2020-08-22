@@ -22,7 +22,7 @@ namespace CountryValidation.Countries
             {
                 sum += weights[i] * (int)char.GetNumericValue(number[i]);
             }
-            sum = sum % 11;
+            sum %= 11;
             return string.Format("{0}{1}", "65432110987"[sum], "KJIHGFEDCBA"[sum]);
         }
 
@@ -67,7 +67,7 @@ namespace CountryValidation.Countries
             {
                 sum += weights[i] * (int)char.GetNumericValue(number[i]);
             }
-            sum = sum % 11;
+            sum %= 11;
             return (11 - sum).Mod(10);
         }
 

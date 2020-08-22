@@ -43,7 +43,7 @@ namespace CountryValidation.Countries
                     return ValidationResult.InvalidFormat("1234567890123");
                 }
             }
-            hashResult = hashResult % 11;
+            hashResult %= 11;
             if (hashResult == 10)
             {
                 hashResult = 1;

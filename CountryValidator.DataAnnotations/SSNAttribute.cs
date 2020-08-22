@@ -8,7 +8,7 @@ namespace CountryValidation.DataAnnotations
     /// When applied to a <see cref="string" /> property or parameter, validates that a valid National Identification Number is provided.
     /// </summary>
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Parameter)]
-    public class SSNAttribute : ValidationAttribute
+    public sealed class SSNAttribute : ValidationAttribute
     {
         public SSNAttribute(Country countryCode)
         {

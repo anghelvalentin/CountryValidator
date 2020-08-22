@@ -8,7 +8,7 @@ namespace CountryValidation.DataAnnotations
     /// When applied to a <see cref="string" /> property or parameter, validates that a valid TIN is provided.
     /// </summary>
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Parameter)]
-    public class PersonTINAttribute : ValidationAttribute
+    public sealed class PersonTINAttribute : ValidationAttribute
     {
         public PersonTINAttribute(Country countryCode)
         {

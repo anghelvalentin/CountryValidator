@@ -8,7 +8,7 @@ namespace CountryValidation.DataAnnotations
     /// When applied to a <see cref="string" /> property or parameter, validates that a valid VAT/TVA Code is provided.
     /// </summary>
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Parameter)]
-    public class VATAttribute : ValidationAttribute
+    public sealed class VATAttribute : ValidationAttribute
     {
         public VATAttribute(Country countryCode)
         {

@@ -37,8 +37,7 @@ namespace CountryValidation.Countries
             {2, 7, 9, 3, 8, 0, 6, 4, 1, 5},
             {7, 0, 4, 6, 9, 1, 3, 2, 5, 8}
        };
-
-        int[] inv = { 0, 4, 3, 2, 1, 5, 6, 7, 8, 9 };
+        readonly int[] inv = { 0, 4, 3, 2, 1, 5, 6, 7, 8, 9 };
 
         /// <summary>
         /// Aadhaar

@@ -97,7 +97,7 @@ namespace CountryValidation.Countries
             {
                 sum += weights[i] * alphabet.IndexOf(number[i]);
             }
-            sum = sum % 11;
+            sum %= 11;
             if (sum > 9)
             {
                 return string.Empty;

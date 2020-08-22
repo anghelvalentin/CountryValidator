@@ -52,7 +52,7 @@ namespace CountryValidation.Countries
 
         private int CalculateChecksum(string number)
         {
-            int[] weights = null;
+            int[] weights;
             if (number.Length == 8)
             {
                 weights = new int[] { 8, 9, 2, 3, 4, 5, 6, 7 };

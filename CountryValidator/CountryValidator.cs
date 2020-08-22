@@ -6,7 +6,7 @@ namespace CountryValidation
 {
     public class CountryValidator : ICountryValidator
     {
-        static Dictionary<Country, IdValidationAbstract> _supportedCountries;
+        static readonly Dictionary<Country, IdValidationAbstract> _supportedCountries;
 
         static CountryValidator()
         {

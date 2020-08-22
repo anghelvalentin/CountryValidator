@@ -8,7 +8,7 @@ namespace CountryValidation.DataAnnotations
     /// When applied to a <see cref="string" /> property or parameter, validates that a valid Company Identification Code is provided.
     /// </summary>
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Parameter)]
-    public class CompanyTINAttribute : ValidationAttribute
+    public sealed class CompanyTINAttribute : ValidationAttribute
     {
         public CompanyTINAttribute(Country countryCode)
         {

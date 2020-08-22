@@ -104,16 +104,13 @@ namespace CountryValidation.Countries
 
         public int Checksum(string number)
         {
-            int x = int.Parse(number);
-
-
             int sum = 0;
             for (int i = 0; i < number.Length; i++)
             {
                 int temp = (i % 2 == 0 ? 2 : 1) * (int)char.GetNumericValue(number[i]);
                 if (temp > 9)
                 {
-                    temp = temp - 9;
+                    temp -= 9;
                 }
 
                 sum = sum + temp;

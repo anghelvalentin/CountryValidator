@@ -11,7 +11,7 @@ namespace CountryValidation.Countries
             CountryCode = nameof(Country.SM);
         }
 
-        private int[] _notAvailableNumbers = new int[]
+        private readonly int[] _notAvailableNumbers = new int[]
         {
              2, 4, 6, 7, 8, 9, 10, 11, 13, 16, 18, 19, 20, 21, 25, 26, 30, 32, 33, 35,
              36, 37, 38, 39, 40, 42, 45, 47, 49, 51, 52, 55, 56, 57, 58, 59, 61, 62,

@@ -69,7 +69,7 @@ namespace CountryValidation.Countries
                 s = s + weights[i] * (int)char.GetNumericValue(number[i]);
             }
 
-            s = s % 11;
+            s %= 11;
 
             return "01987654321"[s];
         }

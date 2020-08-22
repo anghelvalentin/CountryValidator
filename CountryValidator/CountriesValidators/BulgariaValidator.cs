@@ -1,5 +1,4 @@
-﻿using System;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 
 namespace CountryValidation.Countries
 {
@@ -32,34 +31,6 @@ namespace CountryValidation.Countries
 
             return isValid ? ValidationResult.Success() : ValidationResult.InvalidChecksum();
 
-        }
-
-        private bool HasValidDate(string number)
-        {
-            var year = int.Parse(number.Substring(0, 2)) + 1900;
-            var month = int.Parse(number.Substring(2, 2));
-            var day = int.Parse(number.Substring(4, 2));
-            if (month > 40)
-            {
-                year += 100;
-                month -= 40;
-            }
-            else if (month > 20)
-            {
-                year -= 100;
-                month -= 20;
-            }
-
-            try
-            {
-                DateTime date = new DateTime(year, month, day);
-
-                return date < DateTime.Now;
-            }
-            catch
-            {
-                return false;
-            }
         }
 
         /// <summary>
@@ -104,14 +75,13 @@ namespace CountryValidation.Countries
 
         private static bool Bg9DigitsVat(string vat)
         {
-            var total = 0;
-            var temp = 0;
+            int temp = 0;
             for (var index = 0; index < 8; index++)
             {
                 temp += vat[index].ToInt() * (index + 1);
             }
 
-            total = temp % 11;
+            int total = temp % 11;
 
             if (total != 10)
             {

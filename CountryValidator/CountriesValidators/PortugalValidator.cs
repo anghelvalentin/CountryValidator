@@ -11,7 +11,7 @@ namespace CountryValidation.Countries
             CountryCode = nameof(Country.PT);
         }
 
-        Dictionary<char, int> chars = new Dictionary<char, int>{
+        readonly Dictionary<char, int> chars = new Dictionary<char, int>{
             { '0', 0},
             {'1', 1},
             {'2', 2},

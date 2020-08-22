@@ -22,7 +22,7 @@ namespace CountryValidation.Countries
             {
                 sum += weights[i] * (int)char.GetNumericValue(number[i]);
             }
-            sum = sum % 11;
+            sum %= 11;
 
             return sum;
         }

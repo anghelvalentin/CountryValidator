@@ -139,6 +139,10 @@ public IActionResult ValidateSSN([Required, SSNAttribute(Country.US)]string ssn)
 | Uruguay              | UY           | RUT numbers                                                                       | RUT numbers                                                                 | RUT numbers                                            | :heavy_check_mark: |
 | Venezuela            | VE           | Registro de Informacion Fiscal (RIF)                                              | Registro de Informacion Fiscal (RIF)                                        | Registro de Informacion Fiscal (RIF)                   | :heavy_check_mark: |
 | South Africa         | ZA           | Social Number                                                                     | VAT Code                                                                    | VAT Code                                               | :heavy_check_mark: |
+
+
+<a href="https://www.buymeacoffee.com/valentinanghel" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" style="height: 51px !important;width: 217px !important;" ></a>
+
 ### License
 Copyright 2020 Anghel Valentin
 
