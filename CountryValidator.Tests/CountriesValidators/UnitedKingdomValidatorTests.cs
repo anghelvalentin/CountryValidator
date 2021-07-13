@@ -32,6 +32,7 @@ namespace CountryValidation.Tests
         [Theory]
         [InlineData("980780684", true)]
         [InlineData("802311781", false)]
+        [InlineData("6640211", false)]
         public void TestCorrectEntityCode(string code, bool isValid)
         {
             Assert.Equal(isValid, _ukValidator.ValidateEntity(code).IsValid);
