@@ -103,6 +103,11 @@ namespace CountryValidation.Countries
                 return ValidationResult.Invalid("Invalid format. First digit cannot be 0");
             }
 
+            if (vatId.Length != 9)
+            {
+                return ValidationResult.Invalid("Invalid length");
+            }
+
             var no = long.Parse(vatId.Substring(0, 7));
 
             for (int i = 0; i < 7; i++)
