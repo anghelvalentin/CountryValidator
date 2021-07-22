@@ -110,7 +110,7 @@ namespace CountryValidation.Countries
 
             else if (id[0] == '0')
             {
-                return ValidationResult.Invalid("Invalid format. The first digit is always 0");
+                return ValidationResult.Invalid("Invalid format. The first digit must never be 0.");
             }
 
             char[] digits = id.ToCharArray();
