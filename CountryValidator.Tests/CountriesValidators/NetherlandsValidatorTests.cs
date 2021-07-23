@@ -27,6 +27,7 @@ namespace CountryValidation.Tests
         [InlineData("111222333", true)]
         [InlineData("941331490", true)]
         [InlineData("101222331", false)]
+        [InlineData("notanumber", false)]
         [InlineData("9413.31.490", true)]
         [InlineData("941331491", false)]
         public void TestIndividualCode(string code, bool isValid)

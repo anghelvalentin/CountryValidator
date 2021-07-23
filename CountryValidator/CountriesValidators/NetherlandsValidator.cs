@@ -51,7 +51,7 @@ namespace CountryValidation.Countries
         public override ValidationResult ValidateIndividualTaxCode(string number)
         {
             number = number.RemoveSpecialCharacthers();
-            if (!(number.All(char.IsDigit) || int.Parse(number) <= 0))
+            if (!(number.All(char.IsDigit) || !int.TryParse(number, out var parsedNum) || parsedNum <= 0 ))
             {
                 return ValidationResult.Invalid("Invalid format. Only digits are allowed");
             }
