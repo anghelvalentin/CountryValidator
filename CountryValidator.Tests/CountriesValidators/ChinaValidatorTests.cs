@@ -24,6 +24,13 @@ namespace CountryValidator.Tests.CountriesValidators
         {
             Assert.Equal(isValid, _chinaValidator.ValidateNationalIdentity(code).IsValid);
         }
-
+        [Theory]
+        [InlineData("350424870506202", true)]
+        [InlineData("350424875006202", false)]
+        [InlineData("350424870540202", false)]
+        public void TestNationalId_15digits(string code, bool isValid)
+        {
+            Assert.Equal(isValid, _chinaValidator.ValidateNationalIdentity(code).IsValid);
+        }
     }
 }
