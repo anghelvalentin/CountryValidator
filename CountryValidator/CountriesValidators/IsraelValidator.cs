@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace CountryValidation.Countries
 {
@@ -12,7 +13,7 @@ namespace CountryValidation.Countries
         public override ValidationResult ValidateEntity(string ssn)
         {
             ssn = ssn.RemoveSpecialCharacthers();
-            if (ssn?.Length > 9)
+            if (ssn?.Length > 9 || !ssn.All(char.IsDigit))
             {
                 return ValidationResult.Invalid("Invalid length. The code must have 9 digits");
             }
