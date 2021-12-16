@@ -105,9 +105,9 @@ namespace CountryValidation.Countries
         {
             try
             {
-                int year = int.Parse(number.Substring(0, 2));
-                int month = int.Parse(number.Substring(2, 2));
-                int day = int.Parse(number.Substring(4, 2));
+                int year = int.Parse(number.Substring(2, 2));
+                int month = int.Parse(number.Substring(4, 2));
+                int day = int.Parse(number.Substring(6, 2));
                 DateTime date = new DateTime(1900 + year, month, day);
                 return true;
             }
