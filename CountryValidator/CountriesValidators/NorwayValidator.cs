@@ -57,7 +57,7 @@ namespace CountryValidation.Countries
                 sum += weights[i] * (int)char.GetNumericValue(number[i]);
             }
 
-            return 11 - sum % 11;
+            return (11 - sum % 11) % 11;
         }
 
         private bool HasValidDate(string number)
