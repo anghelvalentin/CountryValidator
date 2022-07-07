@@ -49,7 +49,7 @@ namespace CountryValidation.Countries
                 sum += (int)char.GetNumericValue(value[i]) * weight[i];
             }
             sum = 11 - sum % 11;
-            return sum == value[8] ? ValidationResult.Success() : ValidationResult.InvalidChecksum();
+            return sum == (int)char.GetNumericValue(value[8]) ? ValidationResult.Success() : ValidationResult.InvalidChecksum();
         }
 
 
