@@ -44,6 +44,8 @@ namespace CountryValidation.Tests
         [InlineData("BE403019261", true)]
         [InlineData("BE 428759497", true)]
         [InlineData("431150351", false)]
+        [InlineData("BE1000003682", true)]
+        [InlineData("BE1000003681", false)]
         public void TestCorrectVatCode(string code, bool isValid)
         {
             Assert.Equal(isValid, _belgiumValidator.ValidateVAT(code).IsValid);
