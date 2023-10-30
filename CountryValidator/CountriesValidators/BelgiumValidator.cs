@@ -66,7 +66,7 @@ namespace CountryValidation.Countries
                 id = id.PadLeft(10, '0');
             }
 
-            if (!Regex.IsMatch(id, @"^0?\d{9}$"))
+            if (!Regex.IsMatch(id, @"^[0-1]?\d{9}$"))
             {
                 return ValidationResult.InvalidFormat("1234567890");
             }
